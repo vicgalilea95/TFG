@@ -1,0 +1,644 @@
+\documentclass[11pt,a4paper]{book}
+\usepackage[latin1]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{makeidx}
+\usepackage{graphicx}
+\usepackage{lmodern}
+\usepackage{kpfonts}
+\usepackage[left=4cm,right=4cm,top=4cm,bottom=4cm]{geometry}
+\usepackage{hyperref}
+\author{Víctor Galilea}
+\newtheorem{teo}{Teorema}
+\newtheorem{defi}{Definición}
+\newtheorem{prop}{Proposición}
+\newtheorem{ej}{Ejemplo}
+\newtheorem{coro}{Corolario}
+\newtheorem{nota}{Nota}
+\newcommand\tab[1][0.5cm]{\hspace*{#1}}
+
+\def\proof{\paragraph{Demostración:\\}}
+\def\endproof{\hfill$\blacksquare$}
+
+\begin{document}
+\chapter{Medida y dimensión de Hausdorff}
+\section{Preliminares}
+\begin{defi}
+\rm
+Sea X un conjunto arbitrario, $\Sigma$ una colección de subconjuntos de X. Se dice que $\Sigma$ es una $\sigma$-álgebra en X si:
+	
+	1-	$\emptyset \in \Sigma$
+	
+	2- $A\in\Sigma\Longrightarrow A^c\in\Sigma$
+	
+	3- $\{A_i\}_{i\in\mathbb{R}}\subseteq\Sigma\Rightarrow\cup_{i\in\mathbb{N}}\{A_i\}\in\Sigma$
+
+\end{defi}
+
+
+Al par ($X, \Sigma$) se le llama espacio medible.
+
+
+\begin{defi}
+\rm
+Sea X un conjunto arbitrario.$\mathcal{A}_0\subseteq\mathcal{P}(X)$ se le dice semianillo, si cumple.
+	
+	1-	A, B$\in\mathcal{A}_0$ $ \Rightarrow$ A$\cap$ B $\in X$
+	
+	2- A, B$\in\mathcal{A}_0$ $ \Rightarrow\exists\{A_i\}_{i=1}^k$ t.q. $ A-B=\cup_{i=1}^kA_i$
+	
+
+\end{defi}
+\begin{defi}
+\rm
+ Sea $(X, \Sigma)$ un espacio medible. Una medida positiva sobre un semianillo $\mathcal{A}_0\subseteq\mathcal{P}(X)$ es una función: 
+$\mu:\mathcal{A}_0\longmapsto[0,\infty]$ tal qué,
+
+\begin{itemize}
+    \item $\mu(\emptyset)=0$
+    \item Si $\{A_i\}_{i=1..n}$ son disjuntos dos a dos, y su unión se encuentra en el semianillo, entonces:\[\mu(\bigcup_{i=1}^n\{A_i\})=\sum_{i=1}^n\mu({A_i})\]
+\end{itemize}
+
+
+
+
+\end{defi}
+Notar que la estructura de semianillo no garantiza que la unión de dos elementos del semianillo, esté en él semianillo.
+
+\begin{defi}
+\rm
+Sea $(X, \Sigma)$ un espacio medible. Una medida positiva en este espacio es una función: 
+
+$\mu:\Sigma\longmapsto[0,\infty]$ tal qué,
+
+1-$\mu(\emptyset)=0$
+
+2-Si $\{A_i\}_{i\in\mathbb{N}}$ son disjuntos dos a dos, entonces 
+$\Rightarrow\mu(\cup_{i\in\mathbb{N}}\{A_i\})=\sum_{i\in\mathbb{N}}\mu({A_i})$
+
+
+\end{defi}
+A la terna $(X,\Sigma, \mu)$ se le llama espacio de medida. Y este es completo sii:
+\begin{equation*}
+B \in \Sigma : \mu(B)=0 \Rightarrow \forall A \in \Sigma \wedge A \subset B, \mu(A)=0
+\end{equation*}
+
+Frecuentemente, hay definida una medida $\mu$ sobre un conjunto pequeño de conjuntos y queremos extenderla a una familia más grande de conjuntos. Esta situación motiva la definición de medida exterior.
+\begin{defi}
+\rm
+Sea X y el conjunto de partes de X, p(X), una medida exterior en X es una función del tipo:
+\begin{equation*}
+\mu^*:p(X)\longmapsto[0,\infty]
+\end{equation*}
+tal que:
+
+
+
+1-$\mu(\emptyset)=0$
+
+2-Si $A \subseteq B \Rightarrow \mu^*(A) \leqslant\mu^*(B)$
+
+3-Si $\{A_i\}_{i\in\mathbb{N}}$ es una sucesión de subconjuntos, entonces 
+$\Rightarrow\mu^*(\cup_{i\in\mathbb{N}}\{A_i\})\leqslant\sum_{i\in\mathbb{N}}\mu^*({A_i})$
+
+
+\end{defi}
+\begin{prop}
+Sea $\mathcal{C}\subseteq\mathcal{P}(X), \emptyset\in\mathcal{C}$ y $\rho:\mathcal{C}\longrightarrow [0, \infty]$ tal que $\rho(\emptyset)=0, \forall B \subseteq X$ se define:
+\begin{equation*}
+\mu^*(B):= inf \lbrace\sum_{n=1}^\infty \rho(A_n) : A_n \in \mathcal{C}, B\subset \bigcup_{n=1}^\infty A_n \rbrace
+\end{equation*}
+Entonces:
+
+1-$\mu^*$ es una medida exterior tal qué $\mu^*(A) \leq \rho(A), \forall A \in \mathcal{C}$, que la llamaremos medida exterior generada por $\rho$.
+
+2-Si $\mathcal{C}$ es un semianillo y $\rho$ una medida generada por el semianillo, $\rho$ y $\mu^*$ coinciden en $\mathcal{C}$.
+\end{prop}
+
+\title{Teorema de extensión de Caratheodory}
+
+Notar que una medida exterior no tiene restricciones en cuanto a los subconjuntos sobre los que está definida, mientras que la medida positiva necesitaba estar definida sobre una $\sigma$-algebra.
+Aunque la medida exterior es más débil que la positiva en el sentido de que no es numerablemente aditiva. Ahora el objetivo es encontrar una $\sigma$-algebra, donde las medidas exteriores, si sean numerablemente aditivas.
+\begin{defi}
+\rm
+Sea $\mu^*$ una medida exterior en X. A$\subseteq$X diremos que es $\mu^*$-medible si $\forall B\subseteq X$
+\begin{equation}
+\mu^{*}(B)=\mu(B\cap A)^*+\mu(B\cap A^c)
+\end{equation}
+\end{defi}
+Denotaremos $M_{\mu^*}$ a la familia de conjuntos $\mu^*$-medibles.
+\begin{teo}[De extensión de Caratheodory]
+Sea X un conjunto y $\mu^*$ una medida exterior en X. Entonces:
+
+a)$M_{\mu^*}$ es una $\sigma$-algebra.
+
+b)La restricción de $\mu$ a $M_{\mu^*}$ es una medida.
+
+c)$(X, M_{\mu^*}, \mu^*)$ es completo.
+
+d)Si $\mu^*$ es la medida exterior generada por la medida sobre un semianilllo $\rho$ de un semianillo $\mathcal{A}_0 \Rightarrow \mathcal{A}_0 \subset M_{\mu^*}$
+
+\end{teo}
+
+\begin{teo}[Teorema de Hahn]
+ Toda medida $\sigma$-finita en un semianillo $\mathcal{A}_0$ se extiende de forma única a cada $\sigma$-álgebra entre $A_0$ y $ M_{\mu^*}$.
+\end{teo}
+\begin{ej}[Medida de Lebesgue en $\mathbb{R}$]
+
+
+Sea $\mathcal{C} = \lbrace (a,b] : a \leq b \rbrace$ y $\rho (a,b]=b-a$,
+
+Veamos que $\mathcal{C}$ cumple las propiedades de semianillo:
+
+1-Dados dos intervalos semi-abiertos A, B su intersección o es vacía o es otro intervalo semi-abierto.
+
+2-La resta de intervalos semi-abiertos es otro intervalo semi-abierto
+
+Se puede ver que $\rho$ es una medida sobre el semianillo. Ahora definamos la medida exterior de Lebesgue:
+\begin{equation*}
+m^*(A)=inf \lbrace \sum_{n=1}^\infty (b_n-a_an): a_n \leq b_n \in \mathbb{R}, A\subset \bigcup_{n=1}^\infty (a_n,b_n]
+\end{equation*}
+
+Qué es una medida exterior. Por el teorema de Caratheodory, sabemos que si restringimos la medida exterior a la $\sigma$-álgebra de los medibles, tenemos una medida, y además al estar generada por la medida $\rho$ del semianillo de los intervalos semiabiertos, estos mismos son conjuntos medibles.
+
+Ya que los conjuntos abiertos se pueden expresar cómo uniones numerables de intervalos semi-abiertos, se tiene que la medida de Lebesgue mide a los abiertos, por lo tanto mide a la menor $\sigma$-álgebra que los contiene, los Borelianos.
+
+\end{ej}
+
+\section{Construcción de la medida de Hausdorff}
+
+
+
+
+\begin{defi}
+\rm
+ Sea un espacio métrico (X,d), A$\subset X$, el diámetro de A se define cómo:
+\begin{equation*}
+diam(A)=\sup_{x,y\in A}\{d(x, y): x,y\in A \}
+\end{equation*}
+\end{defi}
+
+Para $\delta > 0$ y $p >0$ definamos una función de conjunto  $H_{\delta}^{T}:\mathcal{P}(X)\longrightarrow \mathbb{R}$ , que tiene cómo valor:
+\\\\
+\begin{equation}
+H_{\delta}^{T}(A)=inf\{\sum_{i\in\mathbb{N}}diam(U_i)^t: A \subset \bigcup_{i \in \mathbb{N}}U_i, diam(U_i)<\delta \}
+\end{equation}
+\\\\
+Observemos que la única restricción que tienen los conjuntos que cubren a A es el diámetro.\\
+
+Gracias a la proposición 1, las anteriores funciones son medidas exteriores.Observemos que cuando $\delta < \epsilon$:
+\begin{equation*}
+inf\{\sum_{i\in\mathbb{N}}diam(U_i)^t: A \subset \bigcup_{i \in \mathbb{N}}U_i, diam(U_i)<\delta \}  \geq inf\{\sum_{i\in\mathbb{N}}diam(U_i)^t: A \subset \bigcup_{i \in \mathbb{N}}U_i, diam(U_i)<\epsilon \} 
+\end{equation*}
+\begin{equation}\label{epsilonDelta}
+ H_{\delta}^t(A)>H_{\epsilon}^t(A)
+\end{equation}
+Observemos que, $\delta<\epsilon$, la familia de conjuntos con diámetro menor que $\delta$, está contenida en la familia de conjuntos con radio menor que $\epsilon$, por lo tanto al ser una familia más grande el ínfimo será menor para, la familia de conjuntos con radio menor que $\epsilon$
+\begin{defi}
+\rm
+ Llamamos medida exterior t-dimensional de Hausdorff a:
+
+\begin{equation}
+H^t=\lim_{\delta\rightarrow0}H_{\delta}^t
+\end{equation}
+\end{defi}
+\begin{prop}
+ La medida exterior t-dimendional de Hausdorff es una medida exterior
+
+\end{prop}
+
+\begin{proof}
+Comprobemos que $H^t$ cumple con la definición de medida exterior, partiendo de que $H_\delta^t$ lo es:
+\begin{itemize}
+\item \[\hspace{1cm} H^t(\emptyset)=\lim_{\delta\rightarrow0}H_{\delta}^t(\emptyset)=\lim_{\delta\rightarrow0}0=0\]
+\item \[ \hspace{1cm} A \subseteq B\Rightarrow H^t_\delta(A)\leq H^t_\delta(B).\]Entonces, por la regla del sandwich sabemos que:
+\[ \lim_{\delta\rightarrow0} H^t_\delta(A)\leq H^t_\delta(B)\Rightarrow H^t(A) \leq H^(B) \] 
+
+\item  Subaditividad, sabemos que:  
+\[ H^t(\bigcup_{i \in \mathbb{N}}A_i)=\lim_{\delta\longrightarrow 0} H^t_\delta(\bigcup_{i \in \mathbb{N}}A_i)\leq \lim_{\delta\longrightarrow 0} \sum_{i \in \mathbb{N}}H^t(A_i), \]por \ref{epsilonDelta} y sabeindo que $0\leq \delta$ se tiene: 
+\[  \sum_{i \in \mathbb{N}}H_\delta^t(A_i) \leq \sum_{i \in \mathbb{N}}H^t(A_i) \] Por lo tanto llegamos a la conclusión de:
+\[ H^t(\bigcup_{i \in \mathbb{N}}A_i) \leq sum_{i \in \mathbb{N}}H^t(A_i) \]
+\end{itemize}
+
+
+
+
+
+
+
+\end{proof}
+
+
+
+
+
+
+De a cuerdo con el teorema de Caratheodory, sabemos que si restringimos la medida exterior de Hausdorff a la familia de sus conjuntos medibles obtenemos una medida, veamos ahora que los borelianos están contenidos en $M_{H_p}$
+
+
+
+\begin{defi}
+\rm
+ Sea (X, d) un espacio métrico, diremos qué una medida exterior $\mu^*$ es métrica, si dades A,B$\subset$X tales que d(A,B)$\ge$0, la medida exterior de la unión es la suma de medidas exteriores
+\end{defi}
+
+\begin{prop}[pg 40 UNEX]
+ Si $\mu^*$ es una medida exterior métrica en un espacio métrico (X,d), entonces:
+\begin{equation*}
+\mathcal{B}(X) \subset M_{\mu^*}
+\end{equation*}
+\end{prop}
+\begin{proof}
+Basta demostrar que todos los abiertos en X son conjuntos $\mu^*$-medibles, es decir si U es abierto, $\forall A \subseteq X$:
+\begin{equation*}
+\mu^*(A)=\mu^*(A\cap U)+\mu^*(A\cap U^c)
+\end{equation*}
+Sea A t.q. $\mu^*(A)<\infty$, probaremos qué: \[ \mu^*(A)\geq \mu^*(A\cap U)+\mu^*(A\cap U^c)\], ya que, $ \mu^*(A)\leq \mu^*(A\cap U)+\mu^*(A\cap U^c$ es una propiedad de la medida exterior, y el caso para infinito es trivial.
+\\\\
+Definamos la familia de conjuntos: \[U_n = \lbrace x \in X : d(x, U^c) \geq\frac{1}{n}\rbrace\] Notemos qué al ser $U_n$ abierto, $U_n\uparrow U$. Y por lo tanto, $A\cap U_n\uparrow A \cap U$  y: \[d(A\cap U_n, A \cap U^c)\geq d(U_n, U^c) \geq \frac{1}{n}\Rightarrow A\supseteq (A\cap U_n)\cup (A \cap U^c)\]De la definición de medida exterior y de medida exterior métrica deducimos que: 
+\[ \forall n,\hspace{0.2cm} \mu^*(A)\geq \mu^*((A\cap U_n)\cup (A \cap U^c))= \mu^*(A\cap U_n) +\mu^* (A \cap U^c)\]
+Si consideramos la familia de conjuntos \[B_n=A\cap U_n \uparrow B=A\cap U .\] Basta demostrar que $\mu^*(B_n)\uparrow\mu^*(B)$.
+\\\\ Sea la familia de conjuntos disjuntos \[C_1=B_1, n\geq2, C_n=B_n-B_{n-1}\]
+\[B=B_n\cup \bigcup_{i=n}^{ \infty }\lbrace C_i \rbrace \Rightarrow \mu^*(B)=\mu^*(B_n\cup \bigcup_{i=n}^{\infty}\lbrace C_i \rbrace)\leq \mu^*(B_n) + \sum_{i=n}^{\infty}(C_i)\]
+\[\Rightarrow \mu^*(B)-\mu^*(B_n) \leqslant \sum_{i=n}^{\infty}(C_i)\]
+Por lo tanto ahora tenemos que ver qué: $\sum_{i=n}^{\infty}(C_i) \longmapsto 0$, así qué basta demostrar qué: $\sum_{i=0}^{\infty}(C_i)$ converge,\\ Para ello veamos que si \[x \in B_{n-1} \hspace{0.2cm}\wedge \hspace{0.2cm} y \in C_{n+1}\Rightarrow d(x,y)\geq d(B_{n-1}, C_{n+1})\] \\ ya que sabemos que: \[d(B_{n-1}, U^c) \geq \frac{1}{n-1}\hspace{0.2cm} \wedge \hspace{0.2cm} d(C_{n+1}, U^c) \geq \frac{1}{n}\]
+Por lo tanto: \[d(B_{n-1}, C_{n+1}) \geq \frac{1}{n-1}-\frac{1}{n}=\frac{1}{n(n-1)}>0\]
+Ahora de las definiciones de medida exterior y de medida exterior métrica:
+
+\[ \mu^*(B_{n-1})+\mu^*(C_{n+1})=\mu^*(B_{n-1}\cup C_{n+1}) \leq \mu^*(B_{n+1})\] 
+
+
+De modo que:\\$$\mu^*(C_{n+1}) \leq \mu^*(B_{n+1})-\mu^*(B_{n-1}), $$
+$$\mu^*(C_{1})+\mu^*(C_{3})+...+\mu^*(C_{2n-1})\leq\mu^*(B_{1})+\mu^*(B_{3})-\mu^*(B_{1})+..=\mu^*(B_{2n-1}),$$
+
+(Notar que a $B_{n-1}\cup C_{n+1}$ le falta $C_n$ para cubrir a $B_{n+1}$)
+\\Haciendo lo propio para los pares e impares:\\
+
+\[ \sum_{i=1}^n \mu^*(C_{2i-1}) \leq \mu^*(B_{2n-1})\leq \mu^*(A)\]
+\\
+\[ \sum_{i=1}^n \mu^*(C_{2i}) \leq \mu^*(B_{2n})\leq \mu^*(A)\]
+\\ Y cómo por hipótesis $\mu^*(A)\leq \infty$ la serie $\sum\mu^*(C_n)$ converge.
+
+\end{proof}
+
+
+\begin{teo}[1.6.3 UNIEX] 
+$H_p:\mathcal{P}(X)\longrightarrow [0, \infty] $ es una medida exterior métrica
+\end{teo}
+
+\begin{proof}
+
+Sean A, B t.q. d(A,B)$>$0. Ahora sea $d(A,B)>\delta>0$.
+\\Sea una sucesión de conjuntos 
+\[\{C_n\}_{n \in \mathbb{N}}: \hspace{0.2cm}diam(C_n)<\delta,\hspace{0.2cm} A\cup B \subset\cup C_n\]
+Ahora notar que al tomar $\delta$ lo suficientemente pequeño es imposible que un $C_n$ interseque al mismo tiempo con A y B, ya que la distancia entre A y B es mayor que el diámetro de estos conjuntos, teniendo este concepto en cuenta definamos dos familias de índices disjuntas:
+\[I=\{i\in \mathbb{N}:C_n\cap A \neq \emptyset\}\hspace{1cm}J=\{j\in \mathbb{N}:C_n\cap B \neq \emptyset\}\]Se cumple que $A\subseteq\cup_{i\in I}C_i$ y $B\subseteq\cup_{j\in J}C_i$. Por la definición de medida exterior:
+\[H_\delta^t(A\cup B)\leqslant H_\delta^t(A)+H_\delta^t(B)\] Y ya que $H_\delta^t$, está definida sobre el ínfimo de los cubrimientos y hemos tomado uno cualquiera: \[ H_\delta^t(A)+H_\delta^t(B)\leqslant \sum_{i\in I}(diam(C_i))^t)+\sum_{j\in J}(diam(C_j))^t)\leqslant \sum_{i\in \mathbb{N}}(diam(C_i))^t)\] Ahora tomando ínfimo \[ H_\delta^t(A)+H_\delta^t(B)\leqslant  inf\sum_{i\in \mathbb{N}}(diam(C_i))^t)=H_\delta^t(A\cup B)\] Y por el lema del sandwich concluimos que: \[H_\delta^t(A\cup B)= H_\delta^t(A)+H_\delta^t(B)\] 
+\end{proof}
+
+
+Por lo tanto ya hemos llegado a la conclusión de que la medida exterior de Hausdorff restringida a sus medibles es una medida positiva y que los Borelianos son conjuntos $H_p$-medibles
+
+
+\chapter{Autosemejanza}
+
+\begin{defi}
+\rm
+ 
+Una semejanza (o similitud) es una aplicación entre dos espacios métricos,($X_1, d_1$) y ($X_2, d_2$) que modifica las distancias entre dos puntos cualesquiera multiplicándolas por un factor fijo, r. En el caso de los espacios euclídeos, por ejemplo, es la composición de una isometría y una homotecia. Intuitivamente, es una transformación que puede cambiar el tamaño y la orientación de una figura pero no altera su forma.
+\end{defi}
+Una lista de radios, es una lista finita de números positivos ($r_1, r_2, ...,r_n $).
+Si $\forall i$ $r_i$<1 la lista de radios se dice contractiva o hiperbólica
+\begin{defi}
+\rm
+ 
+En un espacio métrico (X,d), un sistema de funciones iterado, relativa a la lista de radios($r_1, r_2, ..,r_n$), es una lista ($f_1, f_2,...,f_n$), con $f_i$ una semejanza de radio $r_i>0$
+\end{defi}
+Sea $K\subset X$ se dice que es invariante o atractor por el sistema de funciones iterado ($f_1, f_2,...,f_n$) sii $$K=\bigcup_{i=1}^nf_i[k]$$
+\begin{defi}
+\rm
+
+El valor de semejanza de una lista de radios ($r_1, r_2, ..,r_n$), es un número positivo s tal que:
+$$\sum_{i=1}^nr_i^s=1$$
+\end{defi}
+\begin{teo}[pg117Edgar]
+
+Si ($r_1, r_2, ..,r_n$) es una lista de radios contractiva, entonces existe un único valor de semejanza s. Se tiene que s=0 sii n=1.
+\end{teo}
+Al número s, se le llama dimensión de semejanza de un conjunto K que sea invariante por un conjunto iterado de funciones relativa a la lista de radios ($r_1, r_2, ..,r_n$), es decir:
+\\
+\\
+Sea la lista de radios ($r_1, r_2, ..,r_n$) tal que, $$\sum_{i=1}^nr_i^s=1,$$ con la lista iterada de funciones relativa a ella ($f_1, f_2,...,f_n$), cada $f_i$ es una semejanza con radio $r_i$, entonces si el conjunto K es invariante por ($f_1, f_2,...,f_n$), es decir: $$K=\bigcup_{i=1}^nf_i[k],$$ se dice que K tiene dimensión de semejanza s.
+\\\\
+Intuitivamente la dimensión de semejanza, debería coincidir con la de Hausdorff y esta es única pero sin las caracterizaciones adecuadas el conjunto K puede admitir dos dimensiones de semejanza, así que esta mas que una característica del conjunto K es una característica del conjunto iterado de funciones ($f_1, f_2,...,f_n$).
+
+\begin{ej}
+Veamos un ejemplo para comprobar que efectivamente un conjunto puede admitir más de una dimensión de semejanza. \\
+Sea el intervalo [0,1], este conjunto es invariante por las semejanzas: $f_1(x)=\frac{x}{2}$ y $f_2(x)=\frac{x}{2}+\frac{1}{2}$, que tienen radio $\frac{1}{2}$ cada una, ya que $$2*\frac{1}{2}^s=1\Leftrightarrow s=1,$$ se tiene que según esta lista de funciones la dimensión de semejanza de [0,1] es 1.\\
+En cambio si ahora tomamos las semejanzas $f_3(x)=\frac{2x}{3}$ y $f_4(x)=\frac{2x}{3}+\frac{1}{3}$, igualmente [0,1] es invariante por la lista de funciones, pero en este caso la dimensión de semejanza sale mayor que 1.
+\end{ej}
+De este ejemplo podemos intuir que habrá que evitar el solapamiento de los conjuntos imagen.
+
+
+
+\chapter{Dimensión topológica}
+
+Los conjuntos de la geometría elemental llevan asociados una dimensión, por ejemplo, puntos aislados tienen dimensión 0, curvas 1, superficies 2. En este capítulo trataremos la dimensión como una propiedad topológica, es decir, si dos conjuntos son topológicamente homeomorfos, estos tendrán igual dimensión topológica. 
+
+\section{Orden de una familia de conjuntos}
+
+\begin{defi}
+\rm
+
+Para un $n \in \mathbb{Z}$, con $n\geq 1$, el orden de una familia de conjuntos distintos $\mathcal{A}$ será menor o igual que n si cualquiera n+2 conjuntos de la familia tienen intersección vacía.\\
+Se dice que $\mathcal{A}$ tiene orden exactamente n si tiene orden menor o igual que n pero no menor o igual que n-1.
+\end{defi}
+\begin{nota}
+Una familia de conjuntos $\mathcal{A}$ tendrá orden $\infty$, si $\forall n \, \in \mathbb{N}$, existen n conjuntos distintos pertenecientes a la familia $\mathcal{A}$, con intersección distinta del vacío. Es decir:
+
+$$\forall n \in \mathbb{N},\tab \exists A_i \in \mathcal{A}, \,\,\, i=1,...,n:\, \bigcap_{i=1}^n A_i \neq \emptyset  $$ 
+
+\end{nota}
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=0.8\textwidth]{ladrillos}
+\caption{Ladrillos} \label{Ladrillos}
+\end{figure}
+\begin{ej}
+
+Para entender mejor la definición de orden de una familia de conjuntos, fijémonos en la figura \ref{Ladrillos} y veamos cual es su orden.
+\\\\
+Supongamos que cada ladrillo y su frontera son un conjunto de la familia, entonces la familia de ladrillos ¿tendrá orden menor o igual que 1? Obviamente no ya que existen grupos de 3 ladrillos que intersecan en un punto dentro de la familia. ¿Y orden menor o igual que 2? Sí ya que cualquier grupo de 4 ladrillos que tomemos dentro de la familia tiene intersección vacía. Por lo tanto, ya que los ladrillos de la figura \ref{Ladrillos} tiene orden menor o igual que dos pero no menor o igual que uno, la familia tiene orden 2.
+
+\end{ej}
+El concepto de orden de un conjunto va a ser muy importante en el desarrollo del trabajo, ya que es algo estrechamente ligado con la dimensión topológica, veamos otro ejemplo para afianzar el entendimiento de esta idea.
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=0.8\textwidth]{disjuntos}
+\caption{Familia de conjuntos disjuntos} \label{disjuntos}
+\end{figure}
+\begin{ej}
+
+En la figura \ref{disjuntos}, podemos apreciar una familia de 3 conjuntos disjuntos A,B,C, sobre un espacio S. ¿Cuál será el orden de esta familia?
+Demons cuenta que al ser conjuntos disjuntos cualquiera 2 conjuntos que tomemos de la familia tienen intersección vacía por lo tanto el orden de esta familia será menor o igual que cero. ¿Puede ser menor o igual que -1? No ya que cualquiera conjunto de la familia que coja (A, B o C) su intersección con sigo mismo es distinto del vacío. Por lo tanto el orden de una familia de conjuntos disjuntos es 0.
+
+\end{ej}
+
+\section{Espacios de dimensión cero}
+Esta sección estará dedicada a entender un poco mejor y caracterizar brevemente los espacios de dimensión cero
+
+\begin{defi}
+\rm
+
+Sean $\mathcal{A}$ y $\mathcal{B}$ dos colecciones de conjuntos, entonces se dice que $\mathcal{B}$ está subordinado a $\mathcal{A}$ si y solo si:
+$$\forall B \in \mathcal{B}, \quad \exists A \in \mathcal{A}: \quad B\subseteq A,$$
+Si $\mathcal{A}$ es un cubrimiento abierto del espacio métrico S, un refinamiento de $\mathcal{A}$ es un cubrimiento abierto $\mathcal{B}$ de S que es subordinado a $\mathcal{A}$.
+\end{defi}
+
+\begin{defi}
+\rm
+
+Sea un espacio métrico S. $A \subseteq S$ es un conjunto clopen, si es cerrado y abierto al mismo tiempo. En particular S y $\emptyset$ son conjuntos clopen.
+
+\end{defi}
+\begin{defi}
+\rm
+
+
+Sea el espacio métrico S. Una partición clopen de S se le dice a una familia de conjuntos en cuya unión está contenido S, son disjuntos dos a dos (partición) y cada uno de ellos es clopen.
+\end{defi}
+
+\begin{defi}
+\rm
+
+Un espacio S es de dimensión cero si y solo si todo cubrimiento abierto y finito de S tiene un refinamiento que es una partición clopen.
+\end{defi}
+
+En la siguiente sección veremos la relación que existe entre los conceptos de orden de una familia de conjuntos y de dimensión topológica (dimensión de cubrimientos).
+
+\section{Dimensión de cubrimientos}
+
+Antes de nada, será indispensable para el desarrollo de este capítulo conocer el concepto de cubrimiento.
+\begin{defi}
+\rm
+Se dice que una familia de conjuntos $\mathcal{A}$, es un cubrimiento del espacio métrico S, que $\mathcal{A}$ cubre a S, si y solo si S está contenido en la unión de todos los elementos de $\mathcal{A}$.
+
+\end{defi}
+Sea S un espacio métrico, y n un número entero $\geq -1$. Se dice que S tiene dimensión de cubrimiento menor o igual que n si y solo si todo cubrimiento con cardinal finito de S posee un refinamiento de orden menor o igual que n.\\
+La dimensión de cubrimiento de S será exactamente n si y solo si es menor o igual que n pero no menor o igual que n-1. Y se escribe Cov(S)=n.\\ Esta también llamada dimensión de Lebesgue.\\
+\\
+De las definiciones de orden de un conjunto y dimensión de cubrimientos, podemos deducir que:
+
+$$Cov(S)=-1\Longleftrightarrow S=\emptyset \vee S=\lbrace \emptyset \rbrace,$$
+
+$Cov(S)=0\Longleftrightarrow$ S es un espacio de dimensión cero ya que se puede cubrir por una partición de conjuntos disjuntos dos a dos, que además estos conjuntos serán clopen en S.\\\\
+A continuación los siguientes resultados nos servirán como herramienta para probar los teoremas de suma y contenido de dimensión de cubrimientos.
+\begin{nota}\label{topologiaElemental}
+
+Sean F cerrado, U un abierto y $F\subseteq U$ entonces: $$\exists V: F\subseteq V \subseteq \overline{V} \subseteq U,$$ con V abierto
+\end{nota}
+Este resutado,  nota \ref{topologiaElemental}, fué visto en la asignatura de topología por lo que prenscindiremos de demostración.
+\begin{teo}[3.2.1 Edgar]\label{teo}
+
+Sea S un espacio métrico y n un número entero $\geq -1$, las siguientes afirmaciones son equivalentes:
+\begin{enumerate}
+  \item $Cov(S\leq n)$
+  \item Si $\mathcal{U}=\lbrace U_1, U_2,..,U_k \rbrace$ es un cubrimiento abierto y finito de S entonces, existe un cubrimiento $\mathcal{B}=\lbrace B_1, B_2,..,B_k \rbrace$ que refina a $\mathcal{U}$, tal que $U_i\supseteq B_i,\,\, i=1,...,k$, tiene su mismo número de elementos y cubre a S con orden menor o igual que n.
+  \item Si $\mathcal{U}=\lbrace U_1, U_2,..,U_{n+2} \rbrace$ es un cubrimiento abierto y finito de S entonces, existe un refinamiento de $\mathcal{U}$, $\mathcal{B}=\lbrace B_1, B_2,..,B_{n+2} \rbrace$, tal que $U_i\supseteq B_i,\,\, i=1,...,k$, que también tiene n+2 elementos, sigue cubriendo a S y: $$\bigcap_{i=1}^{n+2}B_i=\emptyset.$$
+  \item  Si $\mathcal{U}=\lbrace U_1, U_2,..,U_{n+2} \rbrace$ es un cubrimiento abierto de S entonces, existen conjuntos cerrados  $\lbrace F_i\subseteq U_i\rbrace_{i=1}^{n+2}$ que sigue cubriendo a S y: $$\bigcap_{i=1}^{n+2}F_i=\emptyset.$$
+  \end{enumerate}
+ 
+\end{teo}
+
+\begin{proof}
+(2)$\Rightarrow$(3) es claro ya que 2 es una generalización de 3 y (2)$\Rightarrow$(1) también por definición de dimensión de cubrimiento.
+
+\begin{enumerate}
+	\item(1)$\Rightarrow$(2)\\Supongamos que Cov(S)$\leq$n. Sea un cubrimiento abierto de S, $\mathcal{U}=\lbrace U_1,...,U_k \rbrace$.\\ Por definición de dimensión de cubrimientos, $\mathcal{U}$ posee un refinamiento al que llamaremos $\mathcal{W}$ que tiene orden $\leq$ n, ahora para probar (2) debemos ser capaces de construir uno, que lo haremos a partir de $\mathcal{W}$y con  exáctamente k elementos.\\ Fijémonos en que $\forall W \in \mathcal{W}, \quad \exists U_i\in \mathcal{U}:\,\, W\subseteq U$.\\Definamos la familia de conjuntos $\mathcal{B}$ dela siguiente forma : $$B_i=\bigcup \lbrace W\in \mathcal{W}:\quad W\subseteq U_i  \rbrace ,$$ ya que $\mathcal{W}$ cubría ya a S, los $B_i$ por como están construidos también cubren a S, además hemos restringido su cardinal a k, ahora, ¿Siguen teniendo orden $\leq$ n?\\Supongamos que x$\in$S, x como mucho puede estar simultánemaente en n+1 elementos de $\mathcal{W}$ y x $\in B_i$ solo si x$\in W$ para algún W$\subseteq U_i$ por lo tanto x pertenece como mucho a n+1 $B_i$'s, lo que quiere decir que el orden de  $\mathcal{B}$ es n. 
+	\item (3)$\Rightarrow$(2)\\ 
+	Supongamos que se cumple (3). Sea el cubrimiento abierto de S, $\lbrace U_1, U_2,..,U_k \rbrace$, si k$\leq n+1$ entonces el cubrimiento ya tendría orden $\leq n$ y no habría nada que probar.\\ Supongamos entonces que k$\geq n+2$. Sea la familia de conjuntos $\lbrace W_i\rbrace_{i=1}^{n+2}$, definida como, $W_i=U_i$, i=1,...,n+1 y $W_{n+2}=\bigcup_{i=n+2}^k U_i. $. Ya que los $U_i$'s cubren a S, los $W_i$'s también lo cubren.\\ Por (3): $$\forall i \quad \exists W_i: \quad V_i\subseteq W_i, \tab \bigcap_{i=1}^{n+2}V_i=\emptyset,  \tab \bigcup_{i=1}^{n+2}V_i=S,$$ para probar (2) solo nos queda ajustar el número de elementos de n+2 a k, para ello definiremos los $B_i$'s tales que: $$ B_i=V_i,\tab i=1,..,n+1, \tab B_j=V_{n+2}\cap U_j,\tab j\geq n+2,$$ entonces por construcción los $B_i$'s cumplen que: $$ \bigcap_{i=1}^{k}B_i=\emptyset, \tab \bigcup_{i=1}^{k}B_i=S\tab y \tab \forall i, B_i\subseteq U_i. $$
+	\item $(3)\Longrightarrow (4)$\\\\
+	
+Supongamos cierto (3), es decir, dado el cubrimiento abierto de S: 
+
+$$\lbrace U_1, U_2,...,U_{n+2}\rbrace, \quad \forall i=1,...,n+2, \quad \exists B_i \subseteq U_i:$$ $$ \bigcap_{i=1}^{n+2}B_i=\emptyset \quad y \quad \bigcup_{i=1}^{n+2}B_i=S, $$	
+	Con cada $B_i$ conjunto abierto en S. \\ Dado que la unión de todos los $B_i$'s es S se tiene que:
+	
+	$$S\smallsetminus B_1 \subseteq \bigcup_{i=2}^{n+2}B_i, $$
+	
+	Ahora usando la nota \ref{topologiaElemental} y que la unión finita de conjuntos abiertos es a su vez un conjunto abierto, deducimos que $\exists \,\, V_1$, tal que:
+	
+$$S\smallsetminus B_1 \subseteq V_1 \subseteq \overline{V_1} \subseteq \bigcup_{i=2}^{n+2}B_i. $$
+
+Si definimos el conjunto $F_1=S\smallsetminus V_1,$ podemos apreciar que cumple con las siguientes propiedades:
+
+$$S\smallsetminus B_1 \subseteq V_1 \Longrightarrow S\smallsetminus V_1=F_1\subseteq B_1 \Longrightarrow F_1\cap \bigcap_{i=2}^{n+2}B_i= \quad y $$	
+
+$$V_1 \subseteq \bigcup_{i=2}^{n+2}B_i  \Longrightarrow S\smallsetminus V_1=F_1 \supseteq S\smallsetminus  \bigcup_{i=2}^{n+2}B_i\Longrightarrow F_1 \cup \bigcup_{i=2}^{n+2}B_i=S.$$
+
+Siguiendo el mismo procedimiento existe un conjunto abierto $V_2$, tal que:
+
+$$S\smallsetminus B_2 \subseteq V_2 \subseteq \overline{V_2} \subseteq (S\smallsetminus \overline{V_1})\cup \bigcup_{i=3}^{n+2}B_i. $$
+Ahora si $F_2=S\smallsetminus V_2$, se tiene que:
+
+$$F_1\cup F_2 \cup \bigcup_{i=3}^{n+2}B_i=S\quad y \quad F_1\cap F_2 \cap \bigcap_{i=3}^{n+2}B_i=\emptyset $$,
+
+Continuando con este procedimiento acaberemss definiendo todos los $F_i$'s.
+	
+	\item (4)$\Rightarrow$(3)\\ 
+	Suponemos cierto (4).Tenemmos que: $$F_1\subseteq (U_1\cap(S/\bigcap_{i=2}^{n+2}F_i)),$$ Esto es cierto ya que $F_1\subseteq U_1$, por la propia definición de los $F_i's$ y que $F_1\subseteq S/\bigcap_{i=2}^{n+2}F_i)$, también es cierto porque $\bigcap_{i=1}^{n+2}F_i=\emptyset$.\\
+Usando el resultado correspondiente a la nota \ref{topologiaElemental}, existe un conjunto abierto $B_1$ tal que:$$F_1\subseteq B_1 \subseteq \overline{B_1} \subseteq ( U_1\cap(S/\bigcap_{i=2}^{n+2}F_i)),$$ Por como está definido $B_1$, se tiene que $\overline{B_1}\subseteq U_1$ y que $\overline{B_1}\cap \bigcap_{i=2}^{n+2}F_i=\emptyset$.\\Luego también existe un conjunto abierto $B_2$, tal que, 
+$$F_2\subseteq B_2 \subseteq \overline{B_2} \subseteq ( U_2\cap(S/\overline{B_1}\cap\bigcap_{i=3}^{n+2}F_i)),$$
+por lo tanto, $\overline{B_2}\subseteq U_2$ y $\overline{B_1}\cap \overline{B_2}\cap \bigcap_{i=3}^{n+2}F_i=\emptyset$, continuando la demostración de esta forma al final llegamos a que existe una familia de conjuntos abiertos, $B_i$'s i=1,...,n+2, tales que:
+$$B_i\subseteq U_i, \quad S\subseteq \bigcup_{i=1}^{n+2}B_i\quad y \quad \bigcap_{i=1}^{n+2}B_i=\emptyset. $$
+	
+\end{enumerate}
+\end{proof}
+
+
+
+Se denomina ancho de red de un cubrimiento al mayor de los diámetros de los conjuntos que lo forman.
+\begin{prop}\label{propAbiertos}
+
+Sea S un espacio métrico con $Cov(S)\leq 1$. Tomemos A, B, C subconjuntos cerrados de S tales que, A$\cap$B$\cap$C$=\emptyset$, entonces existen conjuntos abiertos U,V,W cumpliendo que:\\$$U\supseteq A, V\supseteq B, C\supseteq W, \tab U\cap W\cap W=\emptyset \tab U\cup V \cup W=S.$$
+\end{prop}
+
+\begin{proof}
+
+Si A,B,C son cerrados, entonces sus complementarios A', B' y C' son abiertos y además, aplicando las leyes de Morgan: $$ (A\cap B\cap C)'=\emptyset '\Rightarrow A'\cup B'\cup C=S,$$ cubren a S, A'$\cup$B'$\cup$C'= S, entonces por el teorema \ref{teo}, existen conjuntos cerrados F,G,H,  F$\subseteq$A', G$\subseteq$B' y H$\subseteq$C', que cubren a S y tienen intersección vacía. Ahora sus complementarios F',G',H', son conjuntos abiertos en S tales que, por coonstrucción: A$\subseteq$F', B$\subseteq$G' y C$\subseteq$H', $F' \cap G' \cap H'= \emptyset$ y $F' \cup G' \cup H'= S$ 
+\end{proof}
+
+
+
+\begin{prop}\label{PropCerrados}
+
+Sea S un espacio métrico con $Cov(S)\leq 1$. Tomemos A, B, C subconjuntos cerrados de S tales que, A$\cap$B$\cap$C$=\emptyset$, entonces existen conjuntos cerrados U,V,W cumpliendo que:\\U$\supseteq$A, V$\supseteq$B, C$\supseteq$W, U$\cap$V$\cap$W$=\emptyset$ y U$\cup$V$\cup$W$=S$
+\end{prop}
+\begin{proof}
+
+Usando la proposición \ref{propAbiertos} y que 3$\rightarrow$4 en el teorema \ref{teo}, la demostración es trivial.
+\end{proof}
+
+\begin{prop}\label{2.2.7Edgar}
+
+Sean $A_1, A_2, A_3$ subconjuntos cerrados de S tales que $A_1\cap A_2\cap A_3= \emptyset$. Entonces existen $U_1, U_2, U_3$ abiertos tales que: $$i=1,2,3, \tab U_i\supseteq A_i, \tab \overline{U_1}\cap \overline{U_2} \cap \overline{U_3}= \emptyset.  $$
+\end{prop}
+
+
+\begin{proof}
+Para i=1,2,3, definamos las funciones $d_i=d(x, A_i)$. Ya que $A_1\cap A_2\cap A_3= \emptyset$, $\forall x \in S, \tab d_1(x)+d_2(x)+d_3(x)>0$. Ahora para i=1,2,3, definamos los conjuntos: $$U_i=\lbrace x \in S: d_i(x)<\frac{1}{4}(d_1(x)+d_2(x)+d_3(x)) \rbrace. $$ Los $U_i$'s son abiertos y además $U_i\supset A_i$, ya que si $x \in A_i \Rightarrow d_i(x)=0.$\\Ahora ¿$\overline{U_1}\cap \overline{U_2}\cap \overline{U_3}=\emptyset$? Supongamos que $x\in \overline{U_1}\cap \overline{U_2}\cap \overline{U_3}$, entonces:$$ i=1,2,3,\tab d_i(x)<\frac{1}{4}(d_1(x)+d_2(x)+d_3(x)),$$Si $  d_1(x)<\frac{1}{4}(d_1(x)+d_2(x)+d_3(x))\Rightarrow d_1(x)<\frac{d_2(x)+d_3(x)}{3}.$\\
+$d_2(x)<\frac{1}{4}(d_1(x)+d_2(x)+d_3(x))\Rightarrow d_2(x)<\frac{d_3(x)}{2}$ y como también $d_3(x)<\frac{1}{4}(d_1(x)+d_2(x)+d_3(x))$ llegamos a la conclusión que, $  d_3(x)<\frac{d_2(x)}{2} $, lo cual es absurdo ya que contradice  lo anterior. 
+\end{proof}
+
+
+\begin{teo}\label{3.2.2 Edgar}
+
+Sea S un espacio métrico compacto y n un entero mayor o igual que -1. Entonces: $Cov(S)\geq n\Leftrightarrow \forall \epsilon> 0$ hay un cubrimiento $\mathcal{A}$ con ancho de red  $>\epsilon$ y orden $\geqslant$ n
+\end{teo}
+
+\subsection{Teoremas de suma}
+
+\begin{teo}\label{3.2.9 Edgar}
+
+Sea S un espacio métrico, sean $F_1$ y $F_2$ subconjuntos cerrados de S tales que $Cov(F_1)\leq 1$ y $Cov(F_2)\leq 1$. Entonces $Cov(F_1\cup F_2\sum)\leq 1$
+\end{teo}
+
+\begin{proof}
+Para probar el teorema debemos ver que existe un cubrimiento para $F_1\cup F_2$ que tiene orden $\leq 1$ Sean A, B, C, conjuntos cerrados en $F_1 \cup F_2$ tales que $A \cap B \cap C= \emptyset$. Sus intersecciones con $F_1$, A$\cap F_1$, B$\cap F_1$, C$\cap F_1$, son cerrados en $ F_1$, y con intersección vacía, $A \cap B \cap C= \emptyset$, entonces por (Proposición \ref{PropCerrados}), existen conjuntos cerrados K, L, M que contienen a los anteriores, K$\supseteq (A\cap F_1)$, L$\supseteq (B\cap F_1)$, M$\supseteq (C\cap F_1)$, cubren a $F_1$, $F_1= K \cup L \cup M$ y su intersección es vacía $K \cap L \cap M = \emptyset$. \\ Podemos definir los conjuntos:$$(K\cup A)\cap F_2, (L\cup B)\cap F_2, (M\cup C)\cap F_2, $$ que por construcción sabemos que también tienen intersección vacía y son cerrados y están contenidos en $F_2$, por el mismo argumento de antes transladado a $F_2$ existen conjuntos cerrados P, Q, R, tales que: $(K\cup A)\cap F_2\subseteq P$, $(L\cup B)\cap F_2 \subseteq Q$,$(M\cup C)\cap F_2\subseteq R$, $P\cap Q\cap R = \emptyset$ y $P\cup Q\cup R=F_2$. Ya estamos en condiciones de construir un cubrimiento de $F_1 \cup F_2$ con orden menor o igual que 1, este es $E=P\cup K$, $F=Q \cup L$ y $G=R\cup M$ que por como están construidos estos conjuntos sabemos que : \begin{enumerate}
+	\item $E\cap F\cap G= \emptyset,$
+	\item $E\cup F\cup G = F_2, $
+\end{enumerate} 
+ya hemos econtrado un cubrimiento de $F_1\cup F_2$ por lo que acabamos de promar que Cov($F_1\cup F_2$)$\leq 1$ 
+\end{proof}
+
+
+
+\begin{coro}\label{3.2.10 Edgar}
+
+Sea S un espacio métrico, sean $F_1$ y $F_2$ subconjuntos cerrados de S tales que $Cov(F_1)\leq n$ y $Cov(F_2)\leq n$. Entonces $Cov(F_1\cup F_2)\leq n$
+\end{coro}
+\begin{proof}
+La prueba de este corolario es similar a la del teorema anterior con la diferencia de en vez de coger 3 conjuntos A,B,C hay que tener en cuenta n+2 conjuntos $A_1,...,A_{n+2}$ y a partir de ahí seguir los mismos pasos.
+\end{proof}
+
+
+\begin{teo}\label{3.2.11 Edgar}
+
+Sea S un espacio métrico, sean $\forall$ i $\in \mathbb{N}$ los conjuntos $F_i \subseteq S$ cerrados de S con Cov($F_i$)$\leq 1$, entonces Cov($\cup_{i \in \mathbb{N}} F_i$)$\leq 1$
+\end{teo}
+
+\begin{proof}
+Debemos probar que la unión numerable de conjuntos cerrados con dimensión Cov menor o igual que uno tiene también dimensión Cov menor o igual que uno, para ello la estrategia a seguir será similar a la del teorema anterior, encontrar un cubrimiento de la unión que tenga orden menor o igual que 1. Procedamos entonces a construir ese cubrimiento. Asumiremos que S=$\cup F_i$\\ Sean los conjuntos cerrados en S, A, B, C con intersección vacía, $A\cap B \cap C= \emptyset$ entonces por (Proposición \ref{2.2.7Edgar}) existen conjuntos abiertos $U_0, V_0, W_0,$tales que: $$\overline{U_0}\cap \overline{V_0}\cap \overline{W_0}=\emptyset,$$ así definimos recursivamente:
+
+\begin{enumerate}
+	\item $$\overline{U_i}\supseteq \overline{U_{i-1}},\tab \overline{V_i}\supseteq \overline{V_{i-1}},\tab \overline{W_i}\supseteq \overline{W_{i-1}},$$
+	\item $$\overline{U_{i}}\cap\overline{V_{i}}\cap \overline{W_{i}}=\emptyset$$
+	\item $$F_i\subseteq U_i \cup V_i \cup W_i $$
+
+\end{enumerate}
+Usaremos el procedimiento de inducción para probar que esas tres propiedades se cumplen para todo i. Si suponemos que $F_0=\emptyset$, la base de la inducción queda probada, así que ahora asumamos que 1),2) y 3) se cumplen $\forall i < k$, los conjuntos $\overline{U_{k-1}}\cap F_k$, $\overline{V_{k-1}}\cap F_k$, $\overline{W_{k-1}}\cap F_k$, por como están construidos son cerrados y con intersección vacía. Ya que Cov($F_k$)$\leq$1, exiten subconjuntos de $F_k$ cerrados $K_k\supseteq \overline{U_{k-1}}\cap F_k, L_k \supseteq \overline{V_{k-1}}\cap F_k, M_k \supseteq \overline{W_{k-1}}\cap F_k$, que tienen intersección vacía y unión exactamente todo $F_k$, $K_k \cap L_k \cap M_k= \emptyset$, $F_k$, $K_k \cup L_k \cup M_k= F_k$, ahora los conjuntos $ \overline{U_{k-1}}\cup K_k$,  $ \overline{V_{k-1}}\cup L_k$,  $ \overline{W_{k-1}}\cup M_k$, son cerrados y con intersección vacía, así que por (Proposición \ref{propAbiertos}) existen conjuntos abiertos $U_k\supseteq \overline{U_{k-1}}\cap K_k $, $V_k\supseteq \overline{V_{k-1}}\cap L_k $, $W_k\supseteq \overline{W_{k-1}}\cap M_k $, tales que cubren a $F_k$ y la intersección de sus cerraduras es vacía, con lo que quedaría probada la inducción.\\ Ahora si definimos los conjuntos: $$U=\bigcup_{i \in \mathbb{N}}U_i \tab V=\bigcup_{i \in \mathbb{N}}V_i \tab W=\bigcup_{i \in \mathbb{N}}W_i, $$ Por como están construidos estos conjuntos son abiertos en $\bigcup_{k \in \mathbb{N}}F_k$ lo cubren y tienen intersección vacía, por lo tanto hemos demostrado que $\bigcup_{k \in \mathbb{N}}F_k$ tiene un cubrimiento con orden 1 entonces Cov($\bigcup_{k \in \mathbb{N}}F_k)\leq 1$
+
+\end{proof}
+
+
+\begin{coro}\label{3.2.12 Edgar}
+
+Sea S un espacio métrico, sean $\forall$ i $\in \mathbb{N}$ los conjuntos $F_i \subseteq S$ cerrados de S con Cov($F_i$)$\leq n$, entonces Cov($\cup_{i \in \mathbb{N}} F_i$)$\leq n$
+
+\end{coro}
+
+\begin{proof}
+La prueba de este corolario es similar a la del teorema anterior con la diferencia de en vez de coger 3 conjuntos A,B,C hay que tener en cuenta n+2 conjuntos $A_1,...,A_{n+2}$ y a partir de ahí seguir los mismos pasos.
+\end{proof}
+
+
+\subsection{Teorema de subconjunto}
+
+\begin{teo}\label{3.2.13 Edgar}
+
+Sea S un espacio métrico y T un subconjunto de S, $T \subseteq S$. Entonces $Cov(T)\leq Cov(s)$
+\end{teo}
+
+
+\begin{proof}
+Si Cov(S)=$\infty$, no hay nada que probar ya que $\infty \geq \infty$.\\Así que supongamos que Cov(S)=$n \in \mathbb{Z}$. Por lo tanto debemos ver que Cov(T)$\leq n$, para ver esto distinguiremos 3 casos, T cerrado, T abierto, T subconjunto cualquiera de S, ni cerrado ni abierto.
+\begin{enumerate}
+	\item Supongamos primero que T es cerrado. Sea $\mathcal{A}$ un cubrimiento abierto de T, ya que T$\subseteq$S, $\forall A \in \mathcal{A}$, $\exists E \subseteq S: A=E \cap T$, con E un abierto en S, ya que T es cerrado E/T es abierto. Por lo tanto podemos definir un cubrimiento abierto en S de la forma: $$\mathcal{A}_1=\lbrace E \subseteq S: E \cap T\rbrace \cup \lbrace S/T \rbrace ,$$
+ya que Cov(S)=n, existe un refinamiento de $\mathcal{A}_1$ al que llamaremos $\mathcal{A}_2$ que tiene orden$\leq$n.\\
+Ahora sea $\mathcal{A}_3=\lbrace E \cap T :E \in \mathcal{A}_2 \rbrace$, $\mathcal{A}_3$ por construcción está subordinado a $\mathcal{A}$, y es, un cubrimiento abierto de T con orden $\leq$ n, por lo tanto, Cov(T)$\leq n$.
+	\item Ahora si T es abierto, T puede escribirse como la unión contable de conjuntos cerrados, $T=\bigcup_{i=1}^{\infty}F_j,$ de la forma: $$F_j=\lbrace x\in S:d(x, S/T)\geq \frac{1}{j} \rbrace ,$$ ahora por (1) $\forall j$ Cov($F_j$)$\leq$n y entonces basándonos en el corolario \ref{3.2.12 Edgar}, Cov(T)$\leq$n 
+	\item Supongamos ahora T un subconjunto general de S, no tiene porque ser ni cerrado ni abierto, sea $\lbrace U_1,..,U_2 \rbrace$ un cubrimiento abierto de T. Sean los conjuntos $V_i$ tales que $\forall i$, $U_i=V_i\cap T$, ya que unión numerable de abiertos es un abierto, $$V=\bigcup_{i=1}^{n+2}V_i,$$ es un conjunto abierto en S, por (2) Cov(V)$\leq$n, entonces existe un refinamiento de $\lbrace V_1,..,V_{n+2} \rbrace$, $\lbrace W_1,..,W_{n+2} \rbrace$ tal que $\forall i$, $W_i\subseteq V_i$ y $$\bigcap_{i=1}^{n+2}W_i = \emptyset, \bigcup_{i=1}^{n+2}W_i =V ,$$ y ya que $ W_i\cap T$ son abiertos en T, cubren a T y , $$\bigcap_{i=1}^{n+2}(W_i \cap T)=\emptyset ,$$ podemos asegurar que Cov(T)$\leq$ n.
+\end{enumerate}
+
+\end{proof}
+
+
+
+
+\begin{thebibliography}{99}
+\bibitem{unex} \textsc{Departamento de matemáticas de la universidad de Extremadura} \textit{Apuntes de teoría de la medida}, volumen 2, Badajoz, 22 de Enero de 2018 \url{http://matematicas.unex.es/~ricarfr/librotmed.pdf} 
+
+\bibitem{lib1} \textsc{C.Swartz}  \textit{Measure integration and function spaces} ,world scientific, 1994
+
+
+
+\end{thebibliography}
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
+

@@ -1,0 +1,29 @@
+modificar notación de diametro (diam)
+
+definir medida
+medida exterior
+medida de lebesgue
+probar que la medida de hausdorff es una medida y que puede medir al  menos los bolerianos
+cond. caratheodory
+
+hago que los conj. que cubren cumplan carath..
+(1.7.1 uni extr)
+1º leer apuntes teoria de la medida
+2º leer (1.7.1 uni extr)
+3º
+definir medida
+hablar del resultado de caratheodory
+hacer recontruccion medida de lebesge
+construir medida de hausdorff, dmostrar k es una medida exteruor, y k mide los bolerianos
+
+ ______________
+|25-4-2018     |
+|______________|
+
+--hacer una pequeña mención a espacios cero-dimensionales
+--demostraciones suma de prop. de cov dim.
+--ver que dim. cov es una prop. topológica.
+--quitar frase, de intuitivamente la dim. autosemejanza= dim. hausdorff 
+y poner en la intro del capitulo que la autosemejanza sirve para calcular dim. de hausdorff
+--´mirar si el conjunto de cantor conserva la dimensión por funciones que lo llevan al oo
+--tema6 mirar dim packing y comparar dimensiones.
