@@ -8,8 +8,14 @@
 \usepackage{graphicx}
 \usepackage{lmodern}
 \usepackage{kpfonts}
-\usepackage[left=4cm,right=4cm,top=4cm,bottom=4cm]{geometry}
+\usepackage[a4paper]{geometry}
 \usepackage{hyperref}
+\usepackage{pdfpages}
+\usepackage{float}
+
+
+
+
 \author{Víctor Galilea}
 \newtheorem{teo}{Teorema}
 \newtheorem{defi}{Definición}
@@ -23,6 +29,16 @@
 \def\endproof{\hfill$\blacksquare$}
 
 \begin{document}
+
+\includepdf[pages={1},scale=0.9,pagecommand={}]{portada_tfg_2018.pdf}
+
+
+
+\addtocontents{toc}{\hspace{-7.5mm} \textbf{Capítulos}}
+\addtocontents{toc}{\hfill \textbf{Página} \par}
+\addtocontents{toc}{\vspace{-2mm} \hspace{-7.5mm} \hrule \par}
+\tableofcontents
+
 \chapter{Medida y dimensión de Hausdorff}
 \section{Preliminares}
 \begin{defi}
@@ -345,28 +361,33 @@ De este ejemplo podemos intuir que habrá que evitar el solapamiento de los conju
 
 \chapter{Dimensión topológica}
 
-Los conjuntos de la geometría elemental llevan asociados una dimensión, por ejemplo, puntos aislados tienen dimensión 0, curvas 1, superficies 2. En este capítulo trataremos la dimensión como una propiedad topológica, es decir, si dos conjuntos son topológicamente homeomorfos, estos tendrán igual dimensión topológica. 
+Para este capítulo todos los espacios que consideremos serán espacios métricos.\\Los conjuntos de la geometría elemental llevan asociados una dimensión, por ejemplo, puntos aislados tienen dimensión 0, curvas 1, superficies 2. En este capítulo trataremos la dimensión como una propiedad topológica, es decir, si dos conjuntos son topológicamente homeomorfos, estos tendrán igual dimensión topológica. 
 
 \section{Orden de una familia de conjuntos}
 
 \begin{defi}
 \rm
 
-Para un $n \in \mathbb{Z}$, con $n\geq 1$, el orden de una familia de conjuntos distintos $\mathcal{A}$ será menor o igual que n si cualquiera n+2 conjuntos de la familia tienen intersección vacía.\\
-Se dice que $\mathcal{A}$ tiene orden exactamente n si tiene orden menor o igual que n pero no menor o igual que n-1.
+Para un $n \in \mathbb{Z}$, con $n\geq -1$, el orden de una familia de conjuntos distintos $\mathcal{A}$ será menor o igual que n si cualquiera n+2 conjuntos de la familia tienen intersección vacía.\\
+Se dice que $\mathcal{A}$ tiene orden exactamente $n\geqslant 0$ si tiene orden menor o igual que n pero no menor o igual que n-1.
 \end{defi}
+
+\begin{nota}
+Se dice que una familia de conjuntos $\mathcal{A}$ tiene orden exáctamente -1 si tiene orden $n\geqslant -1$ 
+\end{nota}
+
 \begin{nota}
 Una familia de conjuntos $\mathcal{A}$ tendrá orden $\infty$, si $\forall n \, \in \mathbb{N}$, existen n conjuntos distintos pertenecientes a la familia $\mathcal{A}$, con intersección distinta del vacío. Es decir:
 
 $$\forall n \in \mathbb{N},\tab \exists A_i \in \mathcal{A}, \,\,\, i=1,...,n:\, \bigcap_{i=1}^n A_i \neq \emptyset  $$ 
 
 \end{nota}
-
-\begin{figure}[htb]
+\begin{figure}[H]
 \centering
-\includegraphics[width=0.8\textwidth]{ladrillos}
+\includegraphics[width=0.8\textwidth]{LADRILLOS}
 \caption{Ladrillos} \label{Ladrillos}
 \end{figure}
+
 \begin{ej}
 
 Para entender mejor la definición de orden de una familia de conjuntos, fijémonos en la figura \ref{Ladrillos} y veamos cual es su orden.
@@ -376,26 +397,34 @@ Supongamos que cada ladrillo y su frontera son un conjunto de la familia, entonc
 \end{ej}
 El concepto de orden de un conjunto va a ser muy importante en el desarrollo del trabajo, ya que es algo estrechamente ligado con la dimensión topológica, veamos otro ejemplo para afianzar el entendimiento de esta idea.
 
-\begin{figure}[htb]
+\begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth]{disjuntos}
 \caption{Familia de conjuntos disjuntos} \label{disjuntos}
 \end{figure}
+
 \begin{ej}
 
 En la figura \ref{disjuntos}, podemos apreciar una familia de 3 conjuntos disjuntos A,B,C, sobre un espacio S. ¿Cuál será el orden de esta familia?
-Demons cuenta que al ser conjuntos disjuntos cualquiera 2 conjuntos que tomemos de la familia tienen intersección vacía por lo tanto el orden de esta familia será menor o igual que cero. ¿Puede ser menor o igual que -1? No ya que cualquiera conjunto de la familia que coja (A, B o C) su intersección con sigo mismo es distinto del vacío. Por lo tanto el orden de una familia de conjuntos disjuntos es 0.
+Démonos cuenta que al ser conjuntos disjuntos cualquiera 2 conjuntos que tomemos de la familia tienen intersección vacía por lo tanto el orden de esta familia será menor o igual que cero. ¿Puede ser menor o igual que -1? No, ya que cualquiera conjunto de la familia que coja (A, B o C) su intersección con sigo mismo es distinto del vacío. Por lo tanto el orden de una familia de conjuntos disjuntos es 0.
 
 \end{ej}
 
 \section{Espacios de dimensión cero}
-Esta sección estará dedicada a entender un poco mejor y caracterizar brevemente los espacios de dimensión cero
+Esta sección estará dedicada a entender un poco mejor y caracterizar brevemente los espacios de dimensión cero.
+
+Antes de nada, será indispensable para el desarrollo de la teoría que sigue, conocer el concepto de cubrimiento.
+\begin{defi}
+\rm
+Se dice que una familia de conjuntos $\mathcal{A}$, es un cubrimiento del espacio métrico S, que $\mathcal{A}$ cubre a S, si y solo si S está contenido en la unión de todos los elementos de $\mathcal{A}$.
+
+\end{defi}
 
 \begin{defi}
 \rm
 
 Sean $\mathcal{A}$ y $\mathcal{B}$ dos colecciones de conjuntos, entonces se dice que $\mathcal{B}$ está subordinado a $\mathcal{A}$ si y solo si:
-$$\forall B \in \mathcal{B}, \quad \exists A \in \mathcal{A}: \quad B\subseteq A,$$
+$$\forall B \in \mathcal{B}, \quad \exists A \in \mathcal{A}: \quad B\subseteq A.$$
 Si $\mathcal{A}$ es un cubrimiento abierto del espacio métrico S, un refinamiento de $\mathcal{A}$ es un cubrimiento abierto $\mathcal{B}$ de S que es subordinado a $\mathcal{A}$.
 \end{defi}
 
@@ -422,15 +451,14 @@ En la siguiente sección veremos la relación que existe entre los conceptos de or
 
 \section{Dimensión de cubrimientos}
 
-Antes de nada, será indispensable para el desarrollo de este capítulo conocer el concepto de cubrimiento.
-\begin{defi}
-\rm
-Se dice que una familia de conjuntos $\mathcal{A}$, es un cubrimiento del espacio métrico S, que $\mathcal{A}$ cubre a S, si y solo si S está contenido en la unión de todos los elementos de $\mathcal{A}$.
 
-\end{defi}
 Sea S un espacio métrico, y n un número entero $\geq -1$. Se dice que S tiene dimensión de cubrimiento menor o igual que n si y solo si todo cubrimiento con cardinal finito de S posee un refinamiento de orden menor o igual que n.\\
-La dimensión de cubrimiento de S será exactamente n si y solo si es menor o igual que n pero no menor o igual que n-1. Y se escribe Cov(S)=n.\\ Esta también llamada dimensión de Lebesgue.\\
+La dimensión de cubrimiento de S será exactamente n, para $n\geqslant 0$ si y solo si es menor o igual que n pero no menor o igual que n-1. Y se escribe Cov(S)=n.\\ Esta también llamada dimensión de Lebesgue.\\
 \\
+\begin{nota}
+Al igual que pasaba con el orden de un conjunto, la dimendión de cubrimientos de un conjunto diremos que es exactamente igual a -1 si y solo si es menor o igual que -1.
+
+\end{nota}
 De las definiciones de orden de un conjunto y dimensión de cubrimientos, podemos deducir que:
 
 $$Cov(S)=-1\Longleftrightarrow S=\emptyset \vee S=\lbrace \emptyset \rbrace,$$
@@ -442,25 +470,27 @@ A continuación los siguientes resultados nos servirán como herramienta para prob
 Sean F cerrado, U un abierto y $F\subseteq U$ entonces: $$\exists V: F\subseteq V \subseteq \overline{V} \subseteq U,$$ con V abierto
 \end{nota}
 Este resutado,  nota \ref{topologiaElemental}, fué visto en la asignatura de topología por lo que prenscindiremos de demostración.
-\begin{teo}[3.2.1 Edgar]\label{teo}
+\begin{teo}\label{teo}
 
 Sea S un espacio métrico y n un número entero $\geq -1$, las siguientes afirmaciones son equivalentes:
 \begin{enumerate}
   \item $Cov(S\leq n)$
   \item Si $\mathcal{U}=\lbrace U_1, U_2,..,U_k \rbrace$ es un cubrimiento abierto y finito de S entonces, existe un cubrimiento $\mathcal{B}=\lbrace B_1, B_2,..,B_k \rbrace$ que refina a $\mathcal{U}$, tal que $U_i\supseteq B_i,\,\, i=1,...,k$, tiene su mismo número de elementos y cubre a S con orden menor o igual que n.
-  \item Si $\mathcal{U}=\lbrace U_1, U_2,..,U_{n+2} \rbrace$ es un cubrimiento abierto y finito de S entonces, existe un refinamiento de $\mathcal{U}$, $\mathcal{B}=\lbrace B_1, B_2,..,B_{n+2} \rbrace$, tal que $U_i\supseteq B_i,\,\, i=1,...,k$, que también tiene n+2 elementos, sigue cubriendo a S y: $$\bigcap_{i=1}^{n+2}B_i=\emptyset.$$
+  \item Si $\mathcal{U}=\lbrace U_1, U_2,..,U_{n+2} \rbrace$ es un cubrimiento abierto y finito de S entonces, existe un refinamiento de $\mathcal{U}$, $\mathcal{B}=\lbrace B_1, B_2,..,B_{n+2} \rbrace$, tal que $U_i\supseteq B_i,\,\, i=1,...,n+2$, que también tiene n+2 elementos, sigue cubriendo a S y: $$\bigcap_{i=1}^{n+2}B_i=\emptyset.$$
   \item  Si $\mathcal{U}=\lbrace U_1, U_2,..,U_{n+2} \rbrace$ es un cubrimiento abierto de S entonces, existen conjuntos cerrados  $\lbrace F_i\subseteq U_i\rbrace_{i=1}^{n+2}$ que sigue cubriendo a S y: $$\bigcap_{i=1}^{n+2}F_i=\emptyset.$$
   \end{enumerate}
  
 \end{teo}
 
 \begin{proof}
-(2)$\Rightarrow$(3) es claro ya que 2 es una generalización de 3 y (2)$\Rightarrow$(1) también por definición de dimensión de cubrimiento.
+(2)$\Rightarrow$(3) es claro ya que (2) es una generalización de (3) y (2)$\Rightarrow$(1) también por definición de dimensión de cubrimiento.
 
 \begin{enumerate}
-	\item(1)$\Rightarrow$(2)\\Supongamos que Cov(S)$\leq$n. Sea un cubrimiento abierto de S, $\mathcal{U}=\lbrace U_1,...,U_k \rbrace$.\\ Por definición de dimensión de cubrimientos, $\mathcal{U}$ posee un refinamiento al que llamaremos $\mathcal{W}$ que tiene orden $\leq$ n, ahora para probar (2) debemos ser capaces de construir uno, que lo haremos a partir de $\mathcal{W}$y con  exáctamente k elementos.\\ Fijémonos en que $\forall W \in \mathcal{W}, \quad \exists U_i\in \mathcal{U}:\,\, W\subseteq U$.\\Definamos la familia de conjuntos $\mathcal{B}$ dela siguiente forma : $$B_i=\bigcup \lbrace W\in \mathcal{W}:\quad W\subseteq U_i  \rbrace ,$$ ya que $\mathcal{W}$ cubría ya a S, los $B_i$ por como están construidos también cubren a S, además hemos restringido su cardinal a k, ahora, ¿Siguen teniendo orden $\leq$ n?\\Supongamos que x$\in$S, x como mucho puede estar simultánemaente en n+1 elementos de $\mathcal{W}$ y x $\in B_i$ solo si x$\in W$ para algún W$\subseteq U_i$ por lo tanto x pertenece como mucho a n+1 $B_i$'s, lo que quiere decir que el orden de  $\mathcal{B}$ es n. 
+	\item(1)$\Rightarrow$(2)\\
+	
+	Supongamos que Cov(S)$\leq$n. Sea un cubrimiento abierto de S, $\mathcal{U}=\lbrace U_1,...,U_k \rbrace$.\\ Por definición de dimensión de cubrimientos, $\mathcal{U}$ posee un refinamiento al que llamaremos $\mathcal{W}$ que tiene orden $\leq$ n, ahora para probar (2) debemos ser capaces de construir uno, que lo haremos a partir de $\mathcal{W}$ y con  exáctamente k elementos.\\ Fijémonos en que: $$\forall W \in \mathcal{W}, \quad \exists U_i\in \mathcal{U}:\,\, W\subseteq U$$.\\Definamos la familia de conjuntos $\mathcal{B}$ de la siguiente forma : $$B_i=\bigcup \lbrace W\in \mathcal{W}:\quad W\subseteq U_i  \rbrace ,$$ ya que $\mathcal{W}$ cubría ya a S, los $B_i\subseteq U_i$ por como están construidos también cubren a S, además hemos restringido su cardinal a k, ahora, ¿siguen teniendo orden $\leq$ n?\\Supongamos que x$\in$S, x como mucho puede estar simultáneamente en n+1 elementos de $\mathcal{W}$ y x $\in B_i$ solo si x$\in W$ para algún W$\subseteq U_i$ por lo tanto x pertenece como mucho a n+1 $B_i$'s, lo que quiere decir que el orden de  $\mathcal{B}$ es n. 
 	\item (3)$\Rightarrow$(2)\\ 
-	Supongamos que se cumple (3). Sea el cubrimiento abierto de S, $\lbrace U_1, U_2,..,U_k \rbrace$, si k$\leq n+1$ entonces el cubrimiento ya tendría orden $\leq n$ y no habría nada que probar.\\ Supongamos entonces que k$\geq n+2$. Sea la familia de conjuntos $\lbrace W_i\rbrace_{i=1}^{n+2}$, definida como, $W_i=U_i$, i=1,...,n+1 y $W_{n+2}=\bigcup_{i=n+2}^k U_i. $. Ya que los $U_i$'s cubren a S, los $W_i$'s también lo cubren.\\ Por (3): $$\forall i \quad \exists W_i: \quad V_i\subseteq W_i, \tab \bigcap_{i=1}^{n+2}V_i=\emptyset,  \tab \bigcup_{i=1}^{n+2}V_i=S,$$ para probar (2) solo nos queda ajustar el número de elementos de n+2 a k, para ello definiremos los $B_i$'s tales que: $$ B_i=V_i,\tab i=1,..,n+1, \tab B_j=V_{n+2}\cap U_j,\tab j\geq n+2,$$ entonces por construcción los $B_i$'s cumplen que: $$ \bigcap_{i=1}^{k}B_i=\emptyset, \tab \bigcup_{i=1}^{k}B_i=S\tab y \tab \forall i, B_i\subseteq U_i. $$
+	Supongamos que se cumple (3). Sea el cubrimiento abierto de S, $\lbrace U_1, U_2,..,U_k \rbrace$, si k$\leq n+1$ entonces el cubrimiento ya tendría orden $\leq n$ y no habría nada que probar.\\ Supongamos entonces que k$\geq n+2$. Sea la familia de conjuntos $\lbrace W_i\rbrace_{i=1}^{n+2}$, definida como, $W_i=U_i$, i=1,...,n+1 y $W_{n+2}=\bigcup_{i=n+2}^k U_i $. Ya que los $U_i$'s cubren a S, los $W_i$'s también lo cubren.\\ Por (3): $$\forall i \quad \exists V_i: \quad V_i\subseteq W_i, \tab \bigcap_{i=1}^{n+2}V_i=\emptyset,  \tab \bigcup_{i=1}^{n+2}V_i=S,$$ para probar (2) solo nos queda ajustar el número de elementos de n+2 a k, para ello definiremos los $B_i$'s tales que: $$ B_i=V_i,\tab i=1,..,n+1, \tab B_j=V_{n+2}\cap U_j,\tab j\geq n+2,$$ entonces por construcción los $B_i$'s cumplen que: $$ \bigcap_{i=1}^{k}B_i=\emptyset, \tab \bigcup_{i=1}^{k}B_i=S\tab y \tab \forall i, B_i\subseteq U_i. $$
 	\item $(3)\Longrightarrow (4)$\\\\
 	
 Supongamos cierto (3), es decir, dado el cubrimiento abierto de S: 
@@ -476,7 +506,7 @@ $$S\smallsetminus B_1 \subseteq V_1 \subseteq \overline{V_1} \subseteq \bigcup_{
 
 Si definimos el conjunto $F_1=S\smallsetminus V_1,$ podemos apreciar que cumple con las siguientes propiedades:
 
-$$S\smallsetminus B_1 \subseteq V_1 \Longrightarrow S\smallsetminus V_1=F_1\subseteq B_1 \Longrightarrow F_1\cap \bigcap_{i=2}^{n+2}B_i= \quad y $$	
+$$S\smallsetminus B_1 \subseteq V_1 \Longrightarrow S\smallsetminus V_1=F_1\subseteq B_1 \Longrightarrow F_1\cap \bigcap_{i=2}^{n+2}B_i=\emptyset \quad y $$	
 
 $$V_1 \subseteq \bigcup_{i=2}^{n+2}B_i  \Longrightarrow S\smallsetminus V_1=F_1 \supseteq S\smallsetminus  \bigcup_{i=2}^{n+2}B_i\Longrightarrow F_1 \cup \bigcup_{i=2}^{n+2}B_i=S.$$
 
@@ -485,14 +515,14 @@ Siguiendo el mismo procedimiento existe un conjunto abierto $V_2$, tal que:
 $$S\smallsetminus B_2 \subseteq V_2 \subseteq \overline{V_2} \subseteq (S\smallsetminus \overline{V_1})\cup \bigcup_{i=3}^{n+2}B_i. $$
 Ahora si $F_2=S\smallsetminus V_2$, se tiene que:
 
-$$F_1\cup F_2 \cup \bigcup_{i=3}^{n+2}B_i=S\quad y \quad F_1\cap F_2 \cap \bigcap_{i=3}^{n+2}B_i=\emptyset $$,
+$$F_1\cup F_2 \cup \bigcup_{i=3}^{n+2}B_i=S\quad y \quad F_1\cap F_2 \cap \bigcap_{i=3}^{n+2}B_i=\emptyset ,$$
 
-Continuando con este procedimiento acaberemss definiendo todos los $F_i$'s.
+Continuando con este procedimiento acabaremos definiendo todos los $F_i$'s.
 	
 	\item (4)$\Rightarrow$(3)\\ 
-	Suponemos cierto (4).Tenemmos que: $$F_1\subseteq (U_1\cap(S/\bigcap_{i=2}^{n+2}F_i)),$$ Esto es cierto ya que $F_1\subseteq U_1$, por la propia definición de los $F_i's$ y que $F_1\subseteq S/\bigcap_{i=2}^{n+2}F_i)$, también es cierto porque $\bigcap_{i=1}^{n+2}F_i=\emptyset$.\\
-Usando el resultado correspondiente a la nota \ref{topologiaElemental}, existe un conjunto abierto $B_1$ tal que:$$F_1\subseteq B_1 \subseteq \overline{B_1} \subseteq ( U_1\cap(S/\bigcap_{i=2}^{n+2}F_i)),$$ Por como está definido $B_1$, se tiene que $\overline{B_1}\subseteq U_1$ y que $\overline{B_1}\cap \bigcap_{i=2}^{n+2}F_i=\emptyset$.\\Luego también existe un conjunto abierto $B_2$, tal que, 
-$$F_2\subseteq B_2 \subseteq \overline{B_2} \subseteq ( U_2\cap(S/\overline{B_1}\cap\bigcap_{i=3}^{n+2}F_i)),$$
+	Suponemos cierto (4).Tenemos que: $$F_1\subseteq (U_1\cap(S\smallsetminus \bigcap_{i=2}^{n+2}F_i)),$$ Esto es cierto ya que $F_1\subseteq U_1$, por la propia definición de los $F_i's$ y que $F_1\subseteq S/\bigcap_{i=2}^{n+2}F_i)$, también es cierto porque $\bigcap_{i=1}^{n+2}F_i=\emptyset$.\\
+Usando el resultado correspondiente a la nota \ref{topologiaElemental}, existe un conjunto abierto $B_1$ tal que:$$F_1\subseteq B_1 \subseteq \overline{B_1} \subseteq ( U_1\cap(S \smallsetminus\bigcap_{i=2}^{n+2}F_i)),$$ Por como está definido $B_1$, se tiene que $\overline{B_1}\subseteq U_1$ y que $\overline{B_1}\cap \bigcap_{i=2}^{n+2}F_i=\emptyset$.\\Luego también existe un conjunto abierto $B_2$, tal que, 
+$$F_2\subseteq B_2 \subseteq \overline{B_2} \subseteq ( U_2\cap(S\smallsetminus(\overline{B_1}\cap\bigcap_{i=3}^{n+2}F_i))),$$
 por lo tanto, $\overline{B_2}\subseteq U_2$ y $\overline{B_1}\cap \overline{B_2}\cap \bigcap_{i=3}^{n+2}F_i=\emptyset$, continuando la demostración de esta forma al final llegamos a que existe una familia de conjuntos abiertos, $B_i$'s i=1,...,n+2, tales que:
 $$B_i\subseteq U_i, \quad S\subseteq \bigcup_{i=1}^{n+2}B_i\quad y \quad \bigcap_{i=1}^{n+2}B_i=\emptyset. $$
 	
@@ -504,23 +534,23 @@ $$B_i\subseteq U_i, \quad S\subseteq \bigcup_{i=1}^{n+2}B_i\quad y \quad \bigcap
 Se denomina ancho de red de un cubrimiento al mayor de los diámetros de los conjuntos que lo forman.
 \begin{prop}\label{propAbiertos}
 
-Sea S un espacio métrico con $Cov(S)\leq 1$. Tomemos A, B, C subconjuntos cerrados de S tales que, A$\cap$B$\cap$C$=\emptyset$, entonces existen conjuntos abiertos U,V,W cumpliendo que:\\$$U\supseteq A, V\supseteq B, C\supseteq W, \tab U\cap W\cap W=\emptyset \tab U\cup V \cup W=S.$$
+Sea S un espacio métrico con $Cov(S)\leq 1$. Tomemos A, B, C subconjuntos cerrados de S tales que, A$\cap$B$\cap$C$=\emptyset$, entonces existen conjuntos abiertos U,V,W cumpliendo que:\\$$U\supseteq A, V\supseteq B, W\supseteq C, \tab U\cap W\cap W=\emptyset \tab U\cup V \cup W=S.$$
 \end{prop}
 
 \begin{proof}
 
-Si A,B,C son cerrados, entonces sus complementarios A', B' y C' son abiertos y además, aplicando las leyes de Morgan: $$ (A\cap B\cap C)'=\emptyset '\Rightarrow A'\cup B'\cup C=S,$$ cubren a S, A'$\cup$B'$\cup$C'= S, entonces por el teorema \ref{teo}, existen conjuntos cerrados F,G,H,  F$\subseteq$A', G$\subseteq$B' y H$\subseteq$C', que cubren a S y tienen intersección vacía. Ahora sus complementarios F',G',H', son conjuntos abiertos en S tales que, por coonstrucción: A$\subseteq$F', B$\subseteq$G' y C$\subseteq$H', $F' \cap G' \cap H'= \emptyset$ y $F' \cup G' \cup H'= S$ 
+Si A,B,C son cerrados, entonces sus complementarios A', B' y C' son abiertos y además, aplicando las Leyes De Morgan: $$ (A\cap B\cap C)'=\emptyset '\Rightarrow A'\cup B'\cup C=S,$$ cubren a S, A'$\cup$B'$\cup$C'= S, entonces por el teorema \ref{teo}, existen conjuntos cerrados F,G,H,  F$\subseteq$A', G$\subseteq$B' y H$\subseteq$C', que cubren a S y tienen intersección vacía. Ahora sus complementarios F',G',H', son conjuntos abiertos en S tales que, por coonstrucción: A$\subseteq$F', B$\subseteq$G' y C$\subseteq$H', $F' \cap G' \cap H'= \emptyset$ y $F' \cup G' \cup H'= S$ 
 \end{proof}
 
 
 
 \begin{prop}\label{PropCerrados}
 
-Sea S un espacio métrico con $Cov(S)\leq 1$. Tomemos A, B, C subconjuntos cerrados de S tales que, A$\cap$B$\cap$C$=\emptyset$, entonces existen conjuntos cerrados U,V,W cumpliendo que:\\U$\supseteq$A, V$\supseteq$B, C$\supseteq$W, U$\cap$V$\cap$W$=\emptyset$ y U$\cup$V$\cup$W$=S$
+Sea S un espacio métrico con $Cov(S)\leq 1$. Tomemos A, B, C subconjuntos cerrados de S tales que, A$\cap$B$\cap$C$=\emptyset$, entonces existen conjuntos cerrados U,V,W cumpliendo que:\\U$\supseteq$A, V$\supseteq$B, W$\supseteq$C, U$\cap$V$\cap$W$=\emptyset$ y U$\cup$V$\cup$W$=S$
 \end{prop}
 \begin{proof}
 
-Usando la proposición \ref{propAbiertos} y que 3$\rightarrow$4 en el teorema \ref{teo}, la demostración es trivial.
+Usando la proposición \ref{propAbiertos} y 4 en el teorema \ref{teo}, la demostración es trivial.
 \end{proof}
 
 \begin{prop}\label{2.2.7Edgar}
@@ -535,24 +565,22 @@ $d_2(x)<\frac{1}{4}(d_1(x)+d_2(x)+d_3(x))\Rightarrow d_2(x)<\frac{d_3(x)}{2}$ y 
 \end{proof}
 
 
-\begin{teo}\label{3.2.2 Edgar}
 
-Sea S un espacio métrico compacto y n un entero mayor o igual que -1. Entonces: $Cov(S)\geq n\Leftrightarrow \forall \epsilon> 0$ hay un cubrimiento $\mathcal{A}$ con ancho de red  $>\epsilon$ y orden $\geqslant$ n
-\end{teo}
 
 \subsection{Teoremas de suma}
 
 \begin{teo}\label{3.2.9 Edgar}
 
-Sea S un espacio métrico, sean $F_1$ y $F_2$ subconjuntos cerrados de S tales que $Cov(F_1)\leq 1$ y $Cov(F_2)\leq 1$. Entonces $Cov(F_1\cup F_2\sum)\leq 1$
+Sea S un espacio métrico, sean $F_1$ y $F_2$ subconjuntos cerrados de S tales que $Cov(F_1)\leq 1$ y $Cov(F_2)\leq 1$. Entonces $Cov(F_1\cup F_2)\leq 1$
 \end{teo}
 
 \begin{proof}
-Para probar el teorema debemos ver que existe un cubrimiento para $F_1\cup F_2$ que tiene orden $\leq 1$ Sean A, B, C, conjuntos cerrados en $F_1 \cup F_2$ tales que $A \cap B \cap C= \emptyset$. Sus intersecciones con $F_1$, A$\cap F_1$, B$\cap F_1$, C$\cap F_1$, son cerrados en $ F_1$, y con intersección vacía, $A \cap B \cap C= \emptyset$, entonces por (Proposición \ref{PropCerrados}), existen conjuntos cerrados K, L, M que contienen a los anteriores, K$\supseteq (A\cap F_1)$, L$\supseteq (B\cap F_1)$, M$\supseteq (C\cap F_1)$, cubren a $F_1$, $F_1= K \cup L \cup M$ y su intersección es vacía $K \cap L \cap M = \emptyset$. \\ Podemos definir los conjuntos:$$(K\cup A)\cap F_2, (L\cup B)\cap F_2, (M\cup C)\cap F_2, $$ que por construcción sabemos que también tienen intersección vacía y son cerrados y están contenidos en $F_2$, por el mismo argumento de antes transladado a $F_2$ existen conjuntos cerrados P, Q, R, tales que: $(K\cup A)\cap F_2\subseteq P$, $(L\cup B)\cap F_2 \subseteq Q$,$(M\cup C)\cap F_2\subseteq R$, $P\cap Q\cap R = \emptyset$ y $P\cup Q\cup R=F_2$. Ya estamos en condiciones de construir un cubrimiento de $F_1 \cup F_2$ con orden menor o igual que 1, este es $E=P\cup K$, $F=Q \cup L$ y $G=R\cup M$ que por como están construidos estos conjuntos sabemos que : \begin{enumerate}
+Para probar el teorema debemos ver que todo cubrimiento de $F_1\cup F_2$ posee un refinamiento  de orden $\leq 1$ Sean A, B, C, conjuntos cerrados en $F_1 \cup F_2$ tales que $A \cap B \cap C= \emptyset$. Sus intersecciones con $F_1$, A$\cap F_1$, B$\cap F_1$, C$\cap F_1$, son cerrados en $ F_1$, y con intersección vacía, $A \cap B \cap C \cap F_1= \emptyset$, entonces por (Proposición \ref{PropCerrados}), existen conjuntos cerrados K, L, M que contienen a los anteriores, K$\supseteq (A\cap F_1)$, L$\supseteq (B\cap F_1)$, M$\supseteq (C\cap F_1)$, cubren a $F_1$, $F_1= K \cup L \cup M$ y su intersección es vacía $K \cap L \cap M = \emptyset$. \\ Podemos definir los conjuntos:$$(K\cup A)\cap F_2, (L\cup B)\cap F_2, (M\cup C)\cap F_2, $$ que por construcción sabemos que también tienen intersección vacía y son cerrados en $F_2$ y están contenidos en $F_2$, por el mismo argumento de antes transladado a $F_2$ existen conjuntos cerrados P, Q, R, tales que: $(K\cup A)\cap F_2\subseteq P$, $(L\cup B)\cap F_2 \subseteq Q$,$(M\cup C)\cap F_2\subseteq R$, $P\cap Q\cap R = \emptyset$ y $P\cup Q\cup R=F_2$. Ya estamos en condiciones de construir un cubrimiento de $F_1 \cup F_2$ con orden menor o igual que 1, este es $E=P\cup K$, $F=Q \cup L$ y $G=R\cup M$ que por como están construidos estos conjuntos sabemos que : \begin{enumerate}
+	\item E, F, G son cerrados.	
 	\item $E\cap F\cap G= \emptyset,$
 	\item $E\cup F\cup G = F_2, $
 \end{enumerate} 
-ya hemos econtrado un cubrimiento de $F_1\cup F_2$ por lo que acabamos de promar que Cov($F_1\cup F_2$)$\leq 1$ 
+ya hemos econtrado para un cubrimiento cualquiera de $F_1\cup F_2$ tiene un refinamiento con orden menor o igual que 1. Por lo que acabamos de promar que Cov($F_1\cup F_2$)$\leq 1$ 
 \end{proof}
 
 
@@ -572,7 +600,7 @@ Sea S un espacio métrico, sean $\forall$ i $\in \mathbb{N}$ los conjuntos $F_i \
 \end{teo}
 
 \begin{proof}
-Debemos probar que la unión numerable de conjuntos cerrados con dimensión Cov menor o igual que uno tiene también dimensión Cov menor o igual que uno, para ello la estrategia a seguir será similar a la del teorema anterior, encontrar un cubrimiento de la unión que tenga orden menor o igual que 1. Procedamos entonces a construir ese cubrimiento. Asumiremos que S=$\cup F_i$\\ Sean los conjuntos cerrados en S, A, B, C con intersección vacía, $A\cap B \cap C= \emptyset$ entonces por (Proposición \ref{2.2.7Edgar}) existen conjuntos abiertos $U_0, V_0, W_0,$tales que: $$\overline{U_0}\cap \overline{V_0}\cap \overline{W_0}=\emptyset,$$ así definimos recursivamente:
+Debemos probar que la unión numerable de conjuntos cerrados con dimensión Cov menor o igual que uno tiene también dimensión Cov menor o igual que uno, para ello la estrategia a seguir será similar a la del teorema anterior, encontrar un cubrimiento de la unión que tenga orden menor o igual que 1. Procedamos entonces a construir ese cubrimiento. Asumiremos que S=$\cup F_i$\\ Sean los conjuntos cerrados en S, A, B, C con intersección vacía, $A\cap B \cap C= \emptyset$ entonces por (Proposición \ref{2.2.7Edgar}) existen conjuntos abiertos $A\subseteq U_0,B\subseteq V_0,C\subseteq W_0,$tales que: $$\overline{U_0}\cap \overline{V_0}\cap \overline{W_0}=\emptyset,$$ Definiremos recursivamente:
 
 \begin{enumerate}
 	\item $$\overline{U_i}\supseteq \overline{U_{i-1}},\tab \overline{V_i}\supseteq \overline{V_{i-1}},\tab \overline{W_i}\supseteq \overline{W_{i-1}},$$
@@ -580,7 +608,7 @@ Debemos probar que la unión numerable de conjuntos cerrados con dimensión Cov me
 	\item $$F_i\subseteq U_i \cup V_i \cup W_i $$
 
 \end{enumerate}
-Usaremos el procedimiento de inducción para probar que esas tres propiedades se cumplen para todo i. Si suponemos que $F_0=\emptyset$, la base de la inducción queda probada, así que ahora asumamos que 1),2) y 3) se cumplen $\forall i < k$, los conjuntos $\overline{U_{k-1}}\cap F_k$, $\overline{V_{k-1}}\cap F_k$, $\overline{W_{k-1}}\cap F_k$, por como están construidos son cerrados y con intersección vacía. Ya que Cov($F_k$)$\leq$1, exiten subconjuntos de $F_k$ cerrados $K_k\supseteq \overline{U_{k-1}}\cap F_k, L_k \supseteq \overline{V_{k-1}}\cap F_k, M_k \supseteq \overline{W_{k-1}}\cap F_k$, que tienen intersección vacía y unión exactamente todo $F_k$, $K_k \cap L_k \cap M_k= \emptyset$, $F_k$, $K_k \cup L_k \cup M_k= F_k$, ahora los conjuntos $ \overline{U_{k-1}}\cup K_k$,  $ \overline{V_{k-1}}\cup L_k$,  $ \overline{W_{k-1}}\cup M_k$, son cerrados y con intersección vacía, así que por (Proposición \ref{propAbiertos}) existen conjuntos abiertos $U_k\supseteq \overline{U_{k-1}}\cap K_k $, $V_k\supseteq \overline{V_{k-1}}\cap L_k $, $W_k\supseteq \overline{W_{k-1}}\cap M_k $, tales que cubren a $F_k$ y la intersección de sus cerraduras es vacía, con lo que quedaría probada la inducción.\\ Ahora si definimos los conjuntos: $$U=\bigcup_{i \in \mathbb{N}}U_i \tab V=\bigcup_{i \in \mathbb{N}}V_i \tab W=\bigcup_{i \in \mathbb{N}}W_i, $$ Por como están construidos estos conjuntos son abiertos en $\bigcup_{k \in \mathbb{N}}F_k$ lo cubren y tienen intersección vacía, por lo tanto hemos demostrado que $\bigcup_{k \in \mathbb{N}}F_k$ tiene un cubrimiento con orden 1 entonces Cov($\bigcup_{k \in \mathbb{N}}F_k)\leq 1$
+Usaremos el procedimiento de inducción para probar que esas tres propiedades se cumplen para todo i. Si suponemos que $F_0=\emptyset$, la base de la inducción queda probada, así que ahora asumamos que 1),2) y 3) se cumplen $\forall i < k$, los conjuntos $\overline{U_{k-1}}\cap F_k$, $\overline{V_{k-1}}\cap F_k$, $\overline{W_{k-1}}\cap F_k$, por como están construidos son cerrados y con intersección vacía.Usando la Proposición \ref{PropCerrados} y  ya que Cov($F_k$)$\leq$1, existen subconjuntos de $F_k$ cerrados $K_k\supseteq \overline{U_{k-1}}\cap F_k, L_k \supseteq \overline{V_{k-1}}\cap F_k, M_k \supseteq \overline{W_{k-1}}\cap F_k$, que tienen intersección vacía y unión exactamente todo $F_k$. $K_k \cap L_k \cap M_k= \emptyset$, $F_k$, $K_k \cup L_k \cup M_k= F_k$. Ahora los conjuntos $ \overline{U_{k-1}}\cup K_k$,  $ \overline{V_{k-1}}\cup L_k$,  $ \overline{W_{k-1}}\cup M_k$, son cerrados y con intersección vacía, así que por (Proposición \ref{propAbiertos}) existen conjuntos abiertos en S:\\ $$U_k\supseteq \overline{U_{k-1}}\cup K_k , \tab V_k\supseteq \overline{V_{k-1}}\cup L_k , \tab W_k\supseteq \overline{W_{k-1}}\cup M_k, $$ tales que cubren a $F_k$ y la intersección de sus clausuras es vacía, con lo que quedaría probada la inducción.\\ Ahora si definimos los conjuntos: $$U=\bigcup_{i \in \mathbb{N}}U_i \tab V=\bigcup_{i \in \mathbb{N}}V_i \tab W=\bigcup_{i \in \mathbb{N}}W_i, $$ Por como están construidos estos conjuntos son abiertos en $\bigcup_{k \in \mathbb{N}}F_k$ lo cubren y tienen intersección vacía, por lo tanto hemos demostrado que $\bigcup_{k \in \mathbb{N}}F_k$ tiene un cubrimiento con orden 1 entonces Cov($\bigcup_{k \in \mathbb{N}}F_k)\leq 1$
 
 \end{proof}
 
@@ -600,23 +628,115 @@ La prueba de este corolario es similar a la del teorema anterior con la diferenc
 
 \begin{teo}\label{3.2.13 Edgar}
 
-Sea S un espacio métrico y T un subconjunto de S, $T \subseteq S$. Entonces $Cov(T)\leq Cov(s)$
+Sea S un espacio métrico y T un subconjunto de S, $T \subseteq S$. Entonces $Cov(T)\leq Cov(S)$
 \end{teo}
 
 
 \begin{proof}
 Si Cov(S)=$\infty$, no hay nada que probar ya que $\infty \geq \infty$.\\Así que supongamos que Cov(S)=$n \in \mathbb{Z}$. Por lo tanto debemos ver que Cov(T)$\leq n$, para ver esto distinguiremos 3 casos, T cerrado, T abierto, T subconjunto cualquiera de S, ni cerrado ni abierto.
 \begin{enumerate}
-	\item Supongamos primero que T es cerrado. Sea $\mathcal{A}$ un cubrimiento abierto de T, ya que T$\subseteq$S, $\forall A \in \mathcal{A}$, $\exists E \subseteq S: A=E \cap T$, con E un abierto en S, ya que T es cerrado E/T es abierto. Por lo tanto podemos definir un cubrimiento abierto en S de la forma: $$\mathcal{A}_1=\lbrace E \subseteq S: E \cap T\rbrace \cup \lbrace S/T \rbrace ,$$
+	\item Supongamos primero que T es cerrado. Sea $\mathcal{A}$ un cubrimiento abierto de T, ya que T$\subseteq$S, $\forall A \in \mathcal{A}$, $\exists E \subseteq S: A=E \cap T$, con E un abierto en S.\\ Ya que T es cerrado E$\smallsetminus$T, es abierto. Por lo tanto podemos definir un cubrimiento abierto en S de la forma: $$\mathcal{A}_1=\lbrace E \subseteq S: E \cap T\in \mathcal{A}, \,\, E \,\, abierto \rbrace \cup \lbrace S/T \rbrace ,$$
 ya que Cov(S)=n, existe un refinamiento de $\mathcal{A}_1$ al que llamaremos $\mathcal{A}_2$ que tiene orden$\leq$n.\\
 Ahora sea $\mathcal{A}_3=\lbrace E \cap T :E \in \mathcal{A}_2 \rbrace$, $\mathcal{A}_3$ por construcción está subordinado a $\mathcal{A}$, y es, un cubrimiento abierto de T con orden $\leq$ n, por lo tanto, Cov(T)$\leq n$.
-	\item Ahora si T es abierto, T puede escribirse como la unión contable de conjuntos cerrados, $T=\bigcup_{i=1}^{\infty}F_j,$ de la forma: $$F_j=\lbrace x\in S:d(x, S/T)\geq \frac{1}{j} \rbrace ,$$ ahora por (1) $\forall j$ Cov($F_j$)$\leq$n y entonces basándonos en el corolario \ref{3.2.12 Edgar}, Cov(T)$\leq$n 
-	\item Supongamos ahora T un subconjunto general de S, no tiene porque ser ni cerrado ni abierto, sea $\lbrace U_1,..,U_2 \rbrace$ un cubrimiento abierto de T. Sean los conjuntos $V_i$ tales que $\forall i$, $U_i=V_i\cap T$, ya que unión numerable de abiertos es un abierto, $$V=\bigcup_{i=1}^{n+2}V_i,$$ es un conjunto abierto en S, por (2) Cov(V)$\leq$n, entonces existe un refinamiento de $\lbrace V_1,..,V_{n+2} \rbrace$, $\lbrace W_1,..,W_{n+2} \rbrace$ tal que $\forall i$, $W_i\subseteq V_i$ y $$\bigcap_{i=1}^{n+2}W_i = \emptyset, \bigcup_{i=1}^{n+2}W_i =V ,$$ y ya que $ W_i\cap T$ son abiertos en T, cubren a T y , $$\bigcap_{i=1}^{n+2}(W_i \cap T)=\emptyset ,$$ podemos asegurar que Cov(T)$\leq$ n.
+	\item Ahora si T es abierto, T puede escribirse como la unión contable de conjuntos cerrados, $T=\bigcup_{i=1}^{\infty}F_j,$ de la forma: $$F_j=\lbrace x\in S:d(x, S/T)\geq \frac{1}{j} \rbrace ,$$ ahora por (1), $\forall j$ Cov($F_j$)$\leq$n y entonces basándonos en el corolario \ref{3.2.12 Edgar}, Cov(T)$\leq$n. 
+	\item Supongamos ahora T un subconjunto general de S, no tiene por qué ser ni cerrado ni abierto, sea $\lbrace U_1,..,U_{n+2} \rbrace$ un cubrimiento abierto de T. Sean los conjuntos $V_i$, abiertos de S, tales que $\forall i$, $U_i=V_i\cap T$, ya que unión numerable de abiertos es un abierto, $$V=\bigcup_{i=1}^{n+2}V_i,$$ es un conjunto abierto en S, por (2) Cov(V)$\leq$n, entonces existe un refinamiento de $\lbrace V_1,..,V_{n+2} \rbrace$, $\lbrace W_1,..,W_{n+2} \rbrace$ tal que $\forall i$, $W_i\subseteq V_i$, $W_i$ abiertos y $$\bigcap_{i=1}^{n+2}W_i = \emptyset,\quad \bigcup_{i=1}^{n+2}W_i =V ,$$ y ya que $ W_i\cap T$ son abiertos en T, cubren a T y , $$\bigcap_{i=1}^{n+2}(W_i \cap T)=\emptyset .$$Entonces $W_i \cap T$ forman un refinamiento de orden $\leqslant$ n, y en consecuencia, podemos asegurar que Cov(T)$\leq$ n.
 \end{enumerate}
 
 \end{proof}
 
 
+¿?¿?MOTIVAR TEOREMAS DE SUMA Y CONTENIDO¿?¿?
+
+\chapter{Ejemplos de fractales}
+
+\section{Conjunto de cantor}
+\subsection{Introducción}
+
+El Conjunto de Cantor, también llamado en inglés "the Cantor Dust ", polvo de Cantor, dust (polvo) es el término que en inglés se utiliza para denominar a los conjuntos con dimensión topológica igual a cero.\\ Es un subconjunto de la recta real, comprendido entre el intervalo [0,1].\\
+Recursivamente se puede construir de la siguiente manera, empiezas por el intervalo [0,1]=$C_0$. Luego este lo divides en 3 partes iguales, y te quedas con los extremos derecho e izquierdo, "eliminas" la parte del medio. Así queda: 
+
+$$C_1=[0,\frac{1}{3}]\cup [\frac{2}{3},1].$$
+
+Aplicaremos esta idea de dividir en 3 y quitar la parte central a los subintervalos que van quedando, así:
+
+$$C_2=[0,\frac{1}{9}]\cup [\frac{2}{9},\frac{1}{3}]\cup [\frac{2}{3},\frac{7}{9}]\cup [\frac{8}{9},1].$$
+\\
+Estos conjuntos, los $C_k$ son una secuencia decreciente, es decir, $$\forall\,\,i\,\in \mathbb{N}:\quad C_i\subseteq C_{i+1},$$
+\\
+
+
+
+El  conjunto de Cantor se define como:
+
+$$\mathcal{C}=\bigcap_{k\in \mathbb{N}}C_k $$
+
+Cada conjunto $C_k$ está compuesto por $2^k$ intervalos cerrados y disjuntos entre ellos, que miden $\left( \frac{1}{3}\right)^k$ cada uno.
+\\La longitud total de cada $C_k$, es la suma de las longitudes de cada intervalo disjunto que contiene, esto es: $\left( \frac{2}{3}\right)^k$.\\
+
+Así que la longitud total de todo el conjunto de cantor será:
+
+$$\lim_{k\longrightarrow\infty}\left( \frac{2}{3}\right)^k=0. $$\\
+
+Que la medida 1-dimensional del cnjunto de Cantor sea 0 da a entender que la dimensión de este conjunto se va a encontrar entre 0 y 1, procedamos pues a calcular su dimensión de fraccionaria.
+
+
+El proceso de construcción del conjunto de cantor se ilustra muy bien en esta imagen:
+
+
+
+
+
+
+\subsection{Calculo dimensión fraccionaria del conjunto de Cantor}
+
+El conjunto de Cantor, $\mathcal{C}$, puede ser construido recursivamente utilizando el siguiente sistema iterado de funciones:
+
+$$f_1(x)=\frac{x}{3}, \quad f_2(\frac{x+2}{3}) $$
+
+De la siguiente forma:
+
+$$C_0=[0,\,\,1],\quad C_1=f_1[C_0]\cup f_2[C_0],...,\quad C_k= f_1[C_{k-1}]\cup f_2[C_{k-1}]$$
+
+La siguiente imagen ilustra el proceso de construcción del conjunto de Cantor mediante las funciones iteradas.\\
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{cantorFunciones}
+\caption{Construcción del Conjunto de Cantor} \label{cantorFunciones}
+\end{figure}
+
+
+La lista de radios asociada al anterior conjunto de funciones iteradas es, $\lbrace \frac{1}{3},\,\,\frac{1}{3}\rbrace,$ Por lo tanto su dimensión de autosemejanza será un número natural s tal que:
+
+$$\frac{1}{3}^s+\frac{1}{3}^s=1, $$
+resolviendo la ecución queda, $s=\frac{lg(2)}{lg(3)}.$ Que es la dimensión de autosemejanza del conjunto de Cantor.
+\\
+\textcolor{red}{VER QUE CUMPLE CON LA CONDICIÓN DE CONJUNTO ABIERTO-->DIM AUTOSEMEJANZA=DIM HAUSDORFF
+}
+\\
+\subsection{Caracterización de los elementos del conjunto de Cantor}
+
+En este apartado nos dispondremos a caracterizar los elementos del conjunto Cantor en base a su representación en base 3, lo que nos ayudará a deducir propiedades importantes del mismo, como su cardinalidad.
+
+\begin{teo}
+Sea $ x\in[0,\,1]$. Entonces x pertenece al conjunto de Cantor $ x\in\mathcal{C}$ si y solo si se puede expresar en base 3 usando solo los dígitos 0 y 2.
+\end{teo}
+
+\begin{proof}
+Los números que en base 3 tienen un 1 en la primera posición decimal se encuentran dentro del intervalo:
+
+$$[0.1_{(3},\,\, 0.122222.._{(3}]=\left[ \frac{1}{3}_{(10},\,\,\frac{2}{3}_{(10}\right]  $$
+
+Así quedarían fuera los elementos que no están en $C_1$.\\
+Notemos que los propios $ \frac{1}{3}$ y $ \frac{2}{3}$, también tienen una representación en base 3 sin utilizar el dígito "1", estas son:
+$$ \frac{1}{3}_{(10}=0.02222..._{(3}, \quad \frac{2}{3}_{(10}=0.2_{(3} $$
+
+Ahora seguimos el proceso con los números que tienen un 1 en la segunda posición decimal, que se encuentran entre 3 intervalos:
+\begin{itemize}
+	\item $$[0.01_{(3},\,\, 0.0122222.._{(3}]=\left[ \frac{1}{9}_{(10},\,\,\frac{2}{9}_{(10}\right],$$ Con lo que hemos eliminado los puntos del intervalo $ \left[ \frac{1}{9}_{(10},\,\,\frac{2}{9}_{(10}\right],$ menos los extremos que al igual que antes también tienen representación en base 3 sin usar el dígito 1
+	
+\end{itemize}
+\end{proof}
 
 
 \begin{thebibliography}{99}
