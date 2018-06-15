@@ -1,15 +1,20 @@
 \BOOKMARK [0][-]{chapter.1}{Medida y dimensi\363n de Hausdorff}{}% 1
 \BOOKMARK [1][-]{section.1.1}{Preliminares}{chapter.1}% 2
 \BOOKMARK [1][-]{section.1.2}{Construcci\363n de la medida de Hausdorff}{chapter.1}% 3
-\BOOKMARK [0][-]{chapter.2}{Autosemejanza}{}% 4
-\BOOKMARK [0][-]{chapter.3}{Dimensi\363n topol\363gica}{}% 5
-\BOOKMARK [1][-]{section.3.1}{Orden de una familia de conjuntos}{chapter.3}% 6
-\BOOKMARK [1][-]{section.3.2}{Espacios de dimensi\363n cero}{chapter.3}% 7
-\BOOKMARK [1][-]{section.3.3}{Dimensi\363n de cubrimientos}{chapter.3}% 8
-\BOOKMARK [2][-]{subsection.3.3.1}{Teoremas de suma}{section.3.3}% 9
-\BOOKMARK [2][-]{subsection.3.3.2}{Teorema de subconjunto}{section.3.3}% 10
-\BOOKMARK [0][-]{chapter.4}{Ejemplos de fractales}{}% 11
-\BOOKMARK [1][-]{section.4.1}{Conjunto de cantor}{chapter.4}% 12
-\BOOKMARK [2][-]{subsection.4.1.1}{Introducci\363n}{section.4.1}% 13
-\BOOKMARK [2][-]{subsection.4.1.2}{Calculo dimensi\363n fraccionaria del conjunto de Cantor}{section.4.1}% 14
-\BOOKMARK [2][-]{subsection.4.1.3}{Caracterizaci\363n de los elementos del conjunto de Cantor}{section.4.1}% 15
+\BOOKMARK [1][-]{section.1.3}{Caracterizaci\363n de la dimensi\363n de Hausdorff}{chapter.1}% 4
+\BOOKMARK [2][-]{subsection.1.3.1}{Teorema del contenido}{section.1.3}% 5
+\BOOKMARK [2][-]{subsection.1.3.2}{Teorema de la uni\363n}{section.1.3}% 6
+\BOOKMARK [0][-]{chapter.2}{Autosemejanza}{}% 7
+\BOOKMARK [0][-]{chapter.3}{Dimensi\363n topol\363gica}{}% 8
+\BOOKMARK [1][-]{section.3.1}{Orden de una familia de conjuntos}{chapter.3}% 9
+\BOOKMARK [1][-]{section.3.2}{Espacios de dimensi\363n cero}{chapter.3}% 10
+\BOOKMARK [1][-]{section.3.3}{Dimensi\363n de cubrimientos}{chapter.3}% 11
+\BOOKMARK [2][-]{subsection.3.3.1}{Teoremas de suma}{section.3.3}% 12
+\BOOKMARK [2][-]{subsection.3.3.2}{Teorema de subconjunto}{section.3.3}% 13
+\BOOKMARK [0][-]{chapter.4}{Ejemplos de fractales}{}% 14
+\BOOKMARK [1][-]{section.4.1}{Conjunto de cantor}{chapter.4}% 15
+\BOOKMARK [2][-]{subsection.4.1.1}{Introducci\363n}{section.4.1}% 16
+\BOOKMARK [2][-]{subsection.4.1.2}{Calculo dimensi\363n fraccionaria del conjunto de Cantor}{section.4.1}% 17
+\BOOKMARK [2][-]{subsection.4.1.3}{Caracterizaci\363n de los elementos del conjunto de Cantor}{section.4.1}% 18
+\BOOKMARK [1][-]{section.4.2}{Conjuntos de Julia}{chapter.4}% 19
+\BOOKMARK [2][-]{subsection.4.2.1}{Conjunto de Julia para la familia cuadr\341tica}{section.4.2}% 20
