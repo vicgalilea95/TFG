@@ -300,7 +300,7 @@ $$\mu^*(C_{1})+\mu^*(C_{3})+...+\mu^*(C_{2n-1})\leq\mu^*(B_{1})+\mu^*(B_{3})-\mu
 \end{proof}
 
 
-\begin{teo}[1.6.3 UNIEX] 
+\begin{teo}
 $H_p:\mathcal{P}(X)\longrightarrow [0, \infty] $ es una medida exterior métrica
 \end{teo}
 
@@ -315,9 +315,71 @@ Ahora notar que al tomar $\delta$ lo suficientemente pequeño es imposible que un
 \end{proof}
 
 
-Por lo tanto ya hemos llegado a la conclusión de que la medida exterior de Hausdorff restringida a sus medibles es una medida positiva y que los Borelianos son conjuntos $H_p$-medibles
+Por lo tanto ya hemos llegado a la conclusión de que la medida exterior de Hausdorff restringida a sus medibles es una medida positiva y que los Borelianos son conjuntos $H_p$-medibles.
+\\\\\\
+\section{Caracterización de la dimensión de Hausdorff}
 
+El siguiente resultado nos dará pie a poder definir la dimensión de Hausdorff, así como el poder asegurar su existencia.
+\begin{teo}
+Sea $A\subset X$ y sean 0$\leqslant p<q$, entonces se tiene que:
+\begin{itemize}
+	\item $$Si \quad H_p(A)<\infty \quad \Rightarrow \quad H_q(A)=0, $$
+	\item $$Si \quad H_q(A)>0 \quad \Rightarrow \quad H_q(A)=\infty. $$
+\end{itemize}
 
+\end{teo}
+
+\begin{proof}
+Basta con probar solo la primera sentencia, ya que la segunda es la contrarecíproca de la primera, es decir si la primera fuera ($A \Rightarrow B$), se tiene que:
+$$(A \Rightarrow B) \Leftrightarrow (\overline{B}\Rightarrow \overline{A})$$
+Ya que la medida de Hausdorff es una función positiva, se tiene que negar que $H_q(A)=0$, es decir que $H_q(A)>0$, y negar que $H_p(A)<\infty$, es decir que $H_p(A)=\infty$.\\
+Ahora sea $\delta >0$ y $B_n$ un cubrimiento de A, con d($B_n)<\delta$, se tiene que:
+$$H_{\delta}^q(A)\leq \sum d(B_n)^q, $$
+y ya que:
+$$d(B_n)^q=d(B_n)^pd(B_n)^{q-p}\leqslant d(B_n)^p\delta^{q-p},$$
+se tiene que:
+
+$$H_{\delta}^q(A)\leq \sum d(B_n)^q<\delta^{q-p} \sum d(B_n)^p.$$
+
+Ahora tomando el ínfimo, se tiene que, $H_{\delta}^q(A)\leqslant \delta^{q-p}H_{\delta}^p(A)$, ahora si hacemos $\delta$ tender a 0, $H^p(A)<\infty.$
+\end{proof}
+\begin{defi}
+De este teorema deducimos que existe un valor crítico $s_0\in [0,\,\, ,\infty]$, tal que :
+
+\begin{itemize}
+	\item $$\forall s<s_0, \quad H^s(A)=\infty, $$
+	\item $$\forall s>s_0, \quad H^s(A)=0. $$
+\end{itemize}
+A este valor $s_0,$ le llamaremos la dimensión de Hausdorff del conjunto A. Denotaremos dim(A)=$s_0$.
+\end{defi}
+
+\begin{nota}
+Si para todo s mayor que 0, $H^s(A)=0$, entonces dim(A)=0. Y si para todo s mayor que 0 también, $H^s(A)=\infty$, entonces dim(A)=$\infty$.
+
+\end{nota}
+
+\subsection{Teorema del contenido}\label{Teorema del contenido}
+\begin{teo}[Teorema del contenido]
+Sean A, B conjuntos Borelianos, entonces si $A \subseteq B$, se tiene que:
+
+$$dim(A)\leqslant dim(B). $$
+\end{teo}
+
+\begin{proof}
+Supongamos que, $A \subseteq B$. Veamos entonces que $dim(A)\leqslant dim(B).$
+\\La dimensión de Hausdorff de B es ese valor $s_0$, tal que $\forall s>s_0$, la medida de Hausdorff de B es 0, sea $s>s_0$, entonces:
+$$ H^s(A)\leqslant H^s(B)=0,$$
+Por lo tanto diam(A)$\leqslant$dim(B).
+\end{proof}
+\subsection{Teorema de la unión}
+\begin{teo}[Teorema de la unión]
+Sean A, B conjuntos Borelianos, entonces $$ dim(A\cup B)=max\lbrace dim(A),\,\,dim(B)\rbrace.$$
+\end{teo}
+
+\begin{proof}
+Por el teorema \ref{Teorema del contenido} sabemos que dim($A\cup B$)$\geqslant$max$\lbrace dim(A), dim(B)\rbrace$. Por lo tanto hay que probar que dim($A\cup B$)$\leqslant$max$\lbrace dim(A), dim(B)\rbrace$.\\
+Sea $s>max\lbrace dim(A),\,\,dim(B) \rbrace$, por lo tanto $H^s(A)=0$ y $H^s(B)=0$. Entonces \textcolor{red}{$$H^s(A\cup B)\leqslant H^s(A)+H^s(B)=0.$$ } Por lo tanto $\forall s >$max$\lbrace dim(A), dim(B) \rbrace$, dim($A\cup B$)$\leqslant$ s. Así que: $$dim(A\cup B)\leqslant max\lbrace dim(A), dim(B) \rbrace.$$
+\end{proof}
 \chapter{Autosemejanza}
 
 \begin{defi}
@@ -356,7 +418,20 @@ Sea el intervalo [0,1], este conjunto es invariante por las semejanzas: $f_1(x)=
 En cambio si ahora tomamos las semejanzas $f_3(x)=\frac{2x}{3}$ y $f_4(x)=\frac{2x}{3}+\frac{1}{3}$, igualmente [0,1] es invariante por la lista de funciones, pero en este caso la dimensión de semejanza sale mayor que 1.
 \end{ej}
 De este ejemplo podemos intuir que habrá que evitar el solapamiento de los conjuntos imagen.
+\begin{defi}
+Se dice que el sistema iterado de funciones ($f_1,\,\,f_2,...,f_n$), cumple la condición de conjunto abierto de Moran si y solo si existe un conjunto abierto no vacío U, tal que: $$Si \quad i\neq j, \quad f_i[U]\cap f_j[U] \neq \emptyset,\quad y \quad \forall\,\,i,\quad f_i[U]\subseteq U$$
 
+Si ese conjunto abierto U existe, se le llama conjunto abierto de Moran para el sistema iterado de funciones.
+\end{defi}
+
+\begin{teo}
+Sea $(r_e)_{e\in E}$, una lista de radios contractivos, sea s su valor de similaridad, y $(f_e)_{e\in E}$ su sistema iterado de funciones asociado en $R^d$. Sea K el conjunto invariante para el sistema iterado de funciones.\\
+Si se satisface la función de conjunto abierto, la dimensión de Hausdorff de K es igual a s, dimk=s.
+
+\end{teo}
+\begin{proof}
+La demostración de este teorema se encuentra en el libro \ref{EdgarLibro}, es el teorema 6.5.4, en la página 193.
+\end{proof}
 
 
 \chapter{Dimensión topológica}
@@ -652,8 +727,8 @@ Ahora sea $\mathcal{A}_3=\lbrace E \cap T :E \in \mathcal{A}_2 \rbrace$, $\mathc
 \section{Conjunto de cantor}
 \subsection{Introducción}
 
-El Conjunto de Cantor, también llamado en inglés "the Cantor Dust ", polvo de Cantor, dust (polvo) es el término que en inglés se utiliza para denominar a los conjuntos con dimensión topológica igual a cero.\\ Es un subconjunto de la recta real, comprendido entre el intervalo [0,1].\\
-Recursivamente se puede construir de la siguiente manera, empiezas por el intervalo [0,1]=$C_0$. Luego este lo divides en 3 partes iguales, y te quedas con los extremos derecho e izquierdo, "eliminas" la parte del medio. Así queda: 
+El Conjunto de Cantor, también llamado en inglés "the Cantor Dust ", polvo de Cantor, dust (polvo) es el término que en inglés se utiliza para denominar a los conjuntos con dimensión topológica igual a cero.\\ Es un subconjunto de la recta real, comprendido entre el intervalo [0,1].\\ Al estar contenido en $\mathbb{R}$ es un ejemplo de fractal muy sencillo de entender y comprenderlo viene muy bien para interiorizar conceptos clave en este tipo de conjuntos, como el de autosemejanza.\\
+Recursivamente se puede construir de la siguiente manera, empiezas por el intervalo [0,1]=$C_0$. Luego este lo divides en 3 partes iguales, y te quedas con los extremos derecho e izquierdo, eliminas la parte del medio. Así queda:
 
 $$C_1=[0,\frac{1}{3}]\cup [\frac{2}{3},1].$$
 
@@ -667,8 +742,10 @@ Estos conjuntos, los $C_k$ son una secuencia decreciente, es decir, $$\forall\,\
 
 
 El  conjunto de Cantor se define como:
+\begin{equation}\label{definicionCantor}
+\mathcal{C}=\bigcap_{k\in \mathbb{N}}C_k 
+\end{equation}
 
-$$\mathcal{C}=\bigcap_{k\in \mathbb{N}}C_k $$
 
 Cada conjunto $C_k$ está compuesto por $2^k$ intervalos cerrados y disjuntos entre ellos, que miden $\left( \frac{1}{3}\right)^k$ cada uno.
 \\La longitud total de cada $C_k$, es la suma de las longitudes de cada intervalo disjunto que contiene, esto es: $\left( \frac{2}{3}\right)^k$.\\
@@ -679,7 +756,13 @@ $$\lim_{k\longrightarrow\infty}\left( \frac{2}{3}\right)^k=0. $$\\
 
 Que la medida 1-dimensional del cnjunto de Cantor sea 0 da a entender que la dimensión de este conjunto se va a encontrar entre 0 y 1, procedamos pues a calcular su dimensión de fraccionaria.
 
-
+\begin{prop}
+No hay dentro del conjunto de Cantor intervalos con longitud mayor que 0
+\end{prop}
+\begin{proof}
+La demostración de este hecho se basa en como está construido el conjunto de Cantor, teniendo en cuenta \ref{definicionCantor}. Cada $C_k$ está formado por $2^k$ intervalos, cada uno con longitud $\frac{1}{3}^k$. Por lo tanto $\mathcal{C}$ estará formado por $\lim_{k\longrightarrow \infty}2^k=\infty$ intervalos cada uno con longitud, $\lim_{k\longrightarrow \infty}\frac{1}{3}^k=0$
+\end{proof}
+\\\\
 El proceso de construcción del conjunto de cantor se ilustra muy bien en esta imagen:
 
 
@@ -734,17 +817,134 @@ $$ \frac{1}{3}_{(10}=0.02222..._{(3}, \quad \frac{2}{3}_{(10}=0.2_{(3} $$
 Ahora seguimos el proceso con los números que tienen un 1 en la segunda posición decimal, que se encuentran entre 3 intervalos:
 \begin{itemize}
 	\item $$[0.01_{(3},\,\, 0.0122222.._{(3}]=\left[ \frac{1}{9}_{(10},\,\,\frac{2}{9}_{(10}\right],$$ Con lo que hemos eliminado los puntos del intervalo $ \left[ \frac{1}{9}_{(10},\,\,\frac{2}{9}_{(10}\right],$ menos los extremos que al igual que antes también tienen representación en base 3 sin usar el dígito 1
-	
+	\item $$[0.11_{(3},\,\, 0.1122222.._{(3}]=\left[ \frac{4}{9}_{(10},\,\,\frac{5}{9}_{(10}\right],$$ Este intervalo en el paso anterior lo hemos dejado fuera.
+	\item $$[0.21_{(3},\,\, 0.2122222.._{(3}]=\left[ \frac{7}{9}_{(10},\,\,\frac{8}{9}_{(10}\right],$$ Con lo que hemos eliminado los puntos del intervalo $ \left[ \frac{7}{9}_{(10},\,\,\frac{8}{9}_{(10}\right],$ menos los extremos que al igual que antes también tienen representación en base 3 sin usar el dígito 1
 \end{itemize}
+Con lo que hemos eliminado los puntos que quedan fuera de $C_2$.\\
+Siguiendo con esta construcción quedaría que los elementos del conjunto de Cantor son aquellos que tienen represenación en base 3 sin usar el dígito 1.
+\end{proof}\\\\\\
+Esta demostración es muy intuitiva viéndola desde el punto de vista de como está estructurado el conjunto de cantor. En sí este se construye empezando por el intervalo [0, 1], dividiéndolo recursivamente en 3 partes iguales y eliminando del conjunto la parte central. \\Un método gráfico para representar los números del intervalo [0, 1] en base 3, es divides el intervalo en 3 partes iguales, 
+
+$$\left[ 0,\,\, , \frac{1}{3}\right] \cup \left[ \frac{1}{3}\,\, ,\frac{2}{3}\right]\cup \left[ \frac{2}{3}\,\, ,1\right]  $$
+
+Si el número esta en la primera parte empezará a escribirse 0.0, si está en la segunda 0.1 y en la tercera 0.2. Luego habrá que repetir el proceso recursivamente para encontrar el resto de cifras decimales. \\
+Por ejemplo si queremos representar el número 0.5 en base 3, según el método, su representación será 0.111111111... ya que por muchas veces que dividas en 3, esté siempre se va a encontrar en el centro.\\
+
+El proceso se ilustra en la siguiente imagen:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{cantorCoordenadas}
+\caption{Coordenadas en base 3.} \label{cantorCoordenadas}
+\end{figure}
+
+
+En la figura \ref{cantorCoordenadas} se puede apreciar bastante bien que los números que en su representación en base 3, cuentan con un algún dígito 1, quedan fuera del conjunto de Cantor.
+\\\\
+
+Una consecuencia inmediata de esta caracterización de los elementos del conjunto de Cantor, es que se puede establecer una biyección entre los elementos de $\mathcal{C}$, y el intervalo (0, 1).\\Esta biyección consistiría en asignarle a cada elemento de $\mathcal{C}$ en base 3, el mismo número cambiándole los 2's por 1's, y así obtendríamos todos los elementos del intervalo (0,1) expresados en base 2. Y al ser este intervalo a su vez biyectivo con la recta real $\mathbb{R}$, estamos en condiciones de afirmar que $\mathcal{C}$ es biyectivo con $\mathbb{R}$ y por lo tanto su cardinal es el mismo.
+
+
+\begin{nota}\label{funcionesCantorNota}
+Al aplicar la función $f_1(x)=\frac{x}{3}$ a un x $\in \,\, [0,\,\,1]$, expresado en base 3, lo que haces es añadirle un 0 al inicio de la expresión decimal. Y al aplicar la función $f_2(x)=\frac{x+2}{3}$ a un x $\in \,\, [0,\,\,1]$, expresado en base 3, lo que haces es añadirle un 2 al inicio de la expresión decimal.
+
+\end{nota}
+
+\begin{ej}
+En este ejemplo vamos a ver que lo que dice la nota \ref{funcionesCantorNota} es cierto.\\$f_1(\frac{1}{3})=\frac{1}{9} $, y $\frac{1}{3}$ tiene expresión en base 3 0.1 y $\frac{1}{9}$, 0.01 .\\
+$f_2(\frac{1}{3})=\frac{7}{9} $, y $\frac{1}{3}$ tiene expresión en base 3 0.1 y $\frac{7}{9}$, 0.21 .
+\end{ej}
+
+\section{Conjuntos de Julia}
+
+Este tipo de conjuntos, que en las condiciones óptimas se tratan de fractales, deben su nombre al matemático francés Gaston Julia, (3 de febrero de 1893, Sidi Bel Abes, Argelia - 19 de marzo de 1978, París, Francia), pionero en el estudio de fractales.\\
+
+Este tipo e conjuntos corresponden a la frontera de atracción de los puntos fijos de un polinomio f, con grado n$\geq 2$ y coeficientes en $\mathbb{C}$ (plano complejo). En función del valor de la derivada de la función en el punto fijo, hay 3 tipos de puntos fijos, sea $z_0$ tal que f($z_0$)=$z_0$ y $\lambda$=f'($z_0$).
+
+\begin{itemize}
+	\item Si $|\lambda| >1$, el punto fijo $z_0$ es repulsor.
+	\item Si $|\lambda| <1$, el punto fijo $z_0$ es atractor.
+	\item Si $|\lambda| =0$, el punto fijo $z_0$ es superatractor.
+	\item Si $|\lambda| =1$, el punto fijo $z_0$ es indiferente.
+\end{itemize}
+
+
+\begin{defi}
+Sea f un polinomio con coeficientes en $\mathbb{C}$ y grado n$\geq 2$. Se define el Conjunto de Julia completo de f, K(f) como:
+
+$$K(f)=\lbrace z \in \mathbb{C}:\quad f^k(z)\nrightarrow \infty \rbrace $$
+\end{defi}
+
+\begin{defi}
+Se define el Conjunto de Julia f, J(f) como la frontera del conjunto de Julia completo, $\delta(K(f))=J(f)$.
+\end{defi}
+
+Por lo tanto si $z\in J(f)$, en todo entorno de z hay puntos v y w tales que, 
+
+$$f^k(w)\longrightarrow \infty, \quad f^k(v)\nrightarrow \infty. $$
+
+\begin{ej}
+Sea la función, f:$\mathbb{C}\longrightarrow \mathbb{C}$, tal que $f(z)=z^2$. se tiene que:
+
+$$f^k(z)=z^{2^k}, $$
+
+por lo tanto:
+
+\begin{itemize}
+	\item Si $|z|<1$, $\Rightarrow \quad f^k(z)\longrightarrow 0.$
+	\item Si $|z|=1$, cuando k tienda a infinito, z prebalecerá en la circunferencia de radio 1.
+	\item Si $|z|>1$, $\Rightarrow \quad f^k(z)\longrightarrow \infty.$
+
+\end{itemize}
+Se puede ver que $f(z)=z^2$, tiene 2 puntos fijos, z=0 y z=1, pero mientras que el 0 es superatractor, $f'(0)=0$, el 1 es repulsor $f'(1)=2$.
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.6\textwidth]{juliazcuadrado}
+\caption{Conjunto de Julia para f(z)=$z^2$} \label{juliazcuadrado}
+\end{figure}
+
+como se puede apreciar en la figura \ref{juliazcuadrado}, en este caso partícular el conjunto de Julia no es un fractal, es la circunferencia centrada en el 0 y de radio 1.
+
+\end{ej}
+
+\textcolor{red}{Mas ejemplos}
+
+\subsection{Conjunto de Julia para la familia cuadrática}
+
+Llamaremos familia al conjunto de funciones con la forma:
+
+$$f_c(z)=z^2+c, \quad c\in\mathbb{C}. $$
+
+Estas familias de funciones tienen dos puntos fijos,
+
+\begin{itemize}
+	\item $z_0=\frac{1+\sqrt{1-4c}}{2},$
+	\item $z_1=\frac{1-\sqrt{1-4c}}{2}.$
+\end{itemize}
+
+Ya que $f_c'(z)=2z$, se tiene que $|f_c'(z_0)|>1$ y que $|f_c'(z_1)|<1$, por lo tanto $z_0$ es repulsor y $z_1$ atractor.
+
+\begin{prop}
+El conjunto de Julia completo para la familia cuadrática de funciones está incluido en la bola de centro en 0 y radio máximo entre $|c|$ y 2.
+\end{prop}
+\begin{proof}
+Tenemos que probar que si $|z|>max\lbrace 2,|c| \rbrace $ entonces: $$f_c^k(z)_{k\longrightarrow \infty}\longrightarrow \infty.$$
+Sea $\epsilon >0$ y z$\in \mathbb{C}$ tal que, $|z|>2+\epsilon$.\\
+$$|f_c(z)|=|z^2+c|\geqslant |z^2|-|c|\geqslant |z^2|-|z|=|z|(|z|-1) $$
+ya que $|z|>2+\epsilon \Rightarrow |z|-1>1+\epsilon$, por lo tanto,
+$$|z|(|z|-1)\geqslant |z|(1+\epsilon) \Rightarrow |f_c(z)| \geqslant |z|(1+\epsilon),\quad |f_c^k(z)| \geqslant |z|(1+\epsilon)^k\longrightarrow \infty $$
 \end{proof}
 
-
 \begin{thebibliography}{99}
-\bibitem{unex} \textsc{Departamento de matemáticas de la universidad de Extremadura} \textit{Apuntes de teoría de la medida}, volumen 2, Badajoz, 22 de Enero de 2018 \url{http://matematicas.unex.es/~ricarfr/librotmed.pdf} 
+\bibitem{unex} \textsc{Departamento de matemáticas de la universidad de Extremadura} \textit{Apuntes de teoría de la medida}, volumen 2, Badajoz, 22 de Enero de 2018 \url{http://matematicas.unex.es/~ricarfr/librotmed.pdf}  
 
 \bibitem{lib1} \textsc{C.Swartz}  \textit{Measure integration and function spaces} ,world scientific, 1994
 
+\bibitem{Falconer} \textsc{Kenneth Falconer} \textit{Fractal Geometry}, second edition, University of St Andrews, Uk, 2003.
 
+\bibitem{Edgar} \textsc{Gerald Edgar} \textit{Measure, topology and Fractal Geometry}, second edition, Springer.\label{EdgarLibro}
+
+\bibitem{PolitecnicaMadrid}  \textit{Sistemas dinámicos complejos}, \url{http://ocw.upm.es/matematica-aplicada/introduccion-a-los-sistemas-dinamicos/contenidos/sdcomplejos.html#}.
 
 \end{thebibliography}
 
